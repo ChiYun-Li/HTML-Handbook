@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-TW"><head><style></style><style></style></head><body class="edit-mode" cz-shortcut-listen="true"><style></style><style></style><style id="claude-agent-animation-styles">
+<html lang="zh-TW"><head><style></style><style></style><style></style></head><body class="" cz-shortcut-listen="true"><style></style><style></style><style id="claude-agent-animation-styles">
       @keyframes claude-pulse {
         0% {
           box-shadow: 
@@ -371,8 +371,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
         <span id="ghBtnLabel">已連線</span>
       </button>
-      <button class="edit-toggle-btn active" id="editToggleBtn" onclick="toggleEditMode()" title="開啟/關閉編輯模式">
-        <span class="edit-dot"></span><span id="editBtnLabel">完成編輯</span>
+      <button class="edit-toggle-btn" id="editToggleBtn" onclick="toggleEditMode()" title="開啟/關閉編輯模式">
+        <span class="edit-dot"></span><span id="editBtnLabel">編輯</span>
       </button>
     </div>
     <!-- 主 TAB -->
@@ -416,7 +416,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
         <td style="width:24px;padding:4px"><button class="row-del-btn" onclick="deleteSynRow(0,0)" title="刪除">✕</button></td>
         
       </tr><tr data-gi="0" data-ii="1">
-        <td><span class="syn-name" data-field="name" data-gi="0" data-ii="1">字母全大寫8888</span></td>
+        <td><span class="syn-name" data-field="name" data-gi="0" data-ii="1">字母全大寫dh</span></td>
         <td><span class="syn-code" onclick="editMode?null:copySyn(this,'text-transform: uppercase;')" data-field="code" data-gi="0" data-ii="1" title="點擊複製">text-transform: uppercase;</span></td>
         <td><span class="syn-note" data-field="note" data-gi="0" data-ii="1"></span></td>
         <td style="width:24px;padding:4px"><button class="row-del-btn" onclick="deleteSynRow(0,1)" title="刪除">✕</button></td>
@@ -2967,8 +2967,8 @@ color: white;<button class="tcpb" onclick="cpyTut('tc_t1_2',event)">複製</butt
 </div>
 
 <!-- ===== Edit Toast ===== -->
-<div class="edit-save-toast" id="editToast">
-  <span class="toast-dot"></span><span id="toastMsg">✏️ 編輯模式已開啟 — 點擊文字可直接修改</span>
+<div class="edit-save-toast show" id="editToast">
+  <span class="toast-dot"></span><span id="toastMsg">⬆️ 正在同步到 GitHub…</span>
 </div>
 
 <!-- ===== Edit Panel (card/block/note editor) ===== -->
