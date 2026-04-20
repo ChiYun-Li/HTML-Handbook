@@ -2999,9 +2999,7 @@ try {
 function saveCustomData() {
   try { localStorage.setItem('rl_custom_v6', JSON.stringify(customData)); } catch(e) {}
   // 如果已設定 GitHub，同步上傳手冊
-  if (getGHSettings().token) {
-    pushHandbookToGitHub();
-  }
+  // GitHub 同步由 toggleEditMode 統一處理，避免重複推送
 }
 
 // ============================================================
