@@ -974,6 +974,207 @@ main { flex: 1; padding: 28px 36px; }
 
 .detail-thumb-wrap:hover .detail-thumb-del { opacity: 1; }
 
+/* ======== RWD ======== */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 210px; }
+  .sidebar {
+    transform: translateX(0);
+    z-index: 300;
+    transition: transform 0.25s cubic-bezier(0.4,0,0.2,1), width 0.22s;
+  }
+  .sidebar.mobile-hidden { transform: translateX(-100%); }
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,26,0.4);
+    z-index: 299;
+    backdrop-filter: blur(2px);
+  }
+  .sidebar-overlay.show { display: block; }
+  .main-container { margin-left: 0 !important; }
+  .mobile-menu-btn { display: flex !important; }
+  main { padding: 20px 16px; }
+  .subtab-bar { padding: 0 16px; }
+  .cards-grid { grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
+}
+@media (max-width: 600px) {
+  .cards-grid { grid-template-columns: 1fr; }
+  .header-subtitle { display: none; }
+  .header-divider { display: none; }
+  .modal { max-width: 100% !important; max-height: 95vh; border-radius: 16px 16px 0 0; }
+  .overlay { align-items: flex-end; padding: 0; }
+}
+
+/* 手機選單按鈕（預設隱藏）*/
+.mobile-menu-btn {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--ink-mute);
+  padding: 4px;
+  margin-right: 4px;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ======== Drag & Drop ======== */
+.card.dragging {
+  opacity: 0.4;
+  transform: scale(0.97);
+  box-shadow: none;
+  border: 1.5px dashed var(--accent);
+}
+.card.drag-over {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.drag-handle {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  background: rgba(26,26,26,0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  opacity: 0;
+  transition: opacity 0.15s;
+  z-index: 2;
+}
+.card:hover .drag-handle { opacity: 1; }
+.drag-handle:active { cursor: grabbing; }
+.drag-handle svg { pointer-events: none; }
+
+/* ======== 問題圖記 — 緊湊列表 ======== */
+.issue-list { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+
+.issue-compact {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+.issue-compact:hover { border-color: var(--accent); box-shadow: 0 2px 12px rgba(217,79,43,0.08); }
+.issue-compact.dragging { opacity: 0.4; border: 1.5px dashed var(--accent); }
+.issue-compact.drag-over { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
+
+.issue-compact-inner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+}
+
+.issue-thumbs {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.issue-thumb {
+  width: 80px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-mute);
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.issue-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.issue-arrow {
+  font-size: 12px;
+  color: var(--ink-mute);
+  flex-shrink: 0;
+}
+
+.issue-info { flex: 1; min-width: 0; }
+.issue-info h4 { font-size: 13px; font-weight: 700; margin-bottom: 3px; color: var(--ink); }
+.issue-info p { font-size: 12px; color: var(--ink-soft); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* Issue Modal 樣式 */
+.ba-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+@media (max-width: 600px) { .ba-row { grid-template-columns: 1fr; } }
+
+.ba-zone {
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--bg);
+  min-height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+}
+.ba-zone:hover { border-color: var(--accent); background: var(--accent-soft); }
+.ba-zone img { width: 100%; height: 100%; object-fit: cover; }
+.ba-zone .img-overlay { position: absolute; inset: 0; background: rgba(26,26,26,0.55); display: none; align-items: center; justify-content: center; gap: 8px; }
+.ba-zone:hover .img-overlay { display: flex; }
+.ba-label-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+
+/* Diff code */
+.diff-wrap {
+  background: #0f1419;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 14px;
+}
+.diff-tabs {
+  display: flex;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  background: #0a0f14;
+}
+.diff-tab {
+  padding: 7px 14px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  border: none;
+  background: transparent;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.15s;
+}
+.diff-tab.on { color: #e6e6e6; border-bottom: 1.5px solid #d94f2b; }
+.diff-body { padding: 12px 0; display: none; }
+.diff-body.on { display: block; }
+.diff-line {
+  display: flex;
+  gap: 8px;
+  padding: 1px 14px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 12px;
+  line-height: 1.7;
+  color: #718096;
+}
+.diff-line.del { background: rgba(248,113,113,0.12); color: #fca5a5; }
+.diff-line.add { background: rgba(74,222,128,0.1); color: #86efac; }
+.diff-sign { width: 12px; flex-shrink: 0; }
+.diff-line.del .diff-sign { color: #f87171; }
+.diff-line.add .diff-sign { color: #4ade80; }
+
 /* ======== Toast ======== */
 .toast {
   position: fixed;
@@ -1001,6 +1202,9 @@ main { flex: 1; padding: 28px 36px; }
 <!-- ===== 全站 Header ===== -->
 <header class="top-header">
   <div class="header-brand">
+    <button class="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="選單">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+    </button>
     <!-- Logo：三張對話卡片疊放，參考圖二 -->
     <div class="header-icon" style="background:transparent;padding:0;width:36px;height:32px;position:relative;">
       <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1024,12 +1228,14 @@ main { flex: 1; padding: 28px 36px; }
       就緒
     </div>
     <button class="btn" id="btnPull" onclick="ghPull()" title="從 GitHub 拉取最新資料" style="display:none;">↓ 拉取</button>
-    <button class="btn" id="btnPush" onclick="ghPush()" title="推送到 GitHub" style="display:none;">↑ 推送</button>
+    <button class="btn" id="btnPush" onclick="ghPush()" title="推送資料到 GitHub" style="display:none;">↑ 資料</button>
+    <button class="btn accent" id="btnPushHTML" onclick="ghPushHTML()" title="上傳新版工具到 GitHub" style="display:none;">↑ 上傳新版</button>
     <button class="btn" onclick="openGHPanel()">⚙️ 設定</button>
   </div>
 </header>
 
-<!-- ===== 側邊欄 ===== -->
+<!-- 手機側邊欄遮罩 -->
+<div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleMobileSidebar()"></div>
 <aside class="sidebar" id="sidebar">
 
   <!-- 頂部列：搜尋 + 收合按鈕 -->
@@ -1242,9 +1448,14 @@ main { flex: 1; padding: 28px 36px; }
       </div>
       <!-- 手冊檔名 -->
       <div class="form-group">
-        <label>手冊檔名（在 Repo 裡的路徑）</label>
-        <input type="text" id="ghFile" placeholder="index.html">
-        <div style="font-size:11px;color:var(--ink-mute);margin-top:4px;">通常是 <code style="background:var(--bg);padding:1px 5px;border-radius:3px;font-size:11px;">index.html</code>，如果你的 Repo 裡叫別的名字就改這裡。</div>
+        <label>資料檔名（data.json 的路徑）</label>
+        <input type="text" id="ghFile" placeholder="data.json">
+        <div style="font-size:11px;color:var(--ink-mute);margin-top:4px;">存放卡片資料的 JSON 檔，通常不需要改。</div>
+      </div>
+      <div class="form-group">
+        <label>工具檔名（index.html 的路徑）</label>
+        <input type="text" id="ghHtmlFile" placeholder="index.html">
+        <div style="font-size:11px;color:var(--ink-mute);margin-top:4px;">點「↑ 上傳新版」時會更新這個檔案，通常是 <code style="background:var(--bg);padding:1px 5px;border-radius:3px;font-size:11px;">index.html</code>。</div>
       </div>
       <!-- 連線狀態 -->
       <div id="ghStatusMsg" style="display:none;padding:10px 14px;border-radius:7px;font-size:13px;margin-top:4px;"></div>
@@ -1281,10 +1492,10 @@ main { flex: 1; padding: 28px 36px; }
       <button class="close-x" onclick="closeEditor()">×</button>
     </div>
     <div class="modal-body" id="editorBody"></div>
-    <div class="modal-footer">
+    <div class="modal-footer" id="editorFooter">
       <button class="btn" onclick="closeEditor()">取消</button>
       <button class="btn" id="editorDeleteBtn" style="display:none;background:#fde9e2;color:var(--err);border-color:#f5c6be;" onclick="editorDelete()">刪除</button>
-      <button class="btn primary" onclick="editorSave()">儲存</button>
+      <button class="btn primary" id="editorSaveBtn" onclick="editorSave()">儲存</button>
     </div>
   </div>
 </div>
@@ -1545,12 +1756,18 @@ function renderBlocks() {
     : DATA.blocks.filter(b => (b.cat || '') === ACTIVE_CAT);
 
   grid.innerHTML = list.map(b => `
-    <div class="card" onclick="openBlockEditor('${b.id}')">
+    <div class="card" draggable="true" data-id="${b.id}"
+      onclick="openBlockEditor('${b.id}')"
+      ondragstart="dragStart(event,'block')" ondragover="dragOver(event)" ondrop="dropOn(event,'block')" ondragend="dragEnd(event)">
+      <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序">
+        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+          <circle cx="4" cy="3" r="1" fill="currentColor"/><circle cx="8" cy="3" r="1" fill="currentColor"/>
+          <circle cx="4" cy="6" r="1" fill="currentColor"/><circle cx="8" cy="6" r="1" fill="currentColor"/>
+          <circle cx="4" cy="9" r="1" fill="currentColor"/><circle cx="8" cy="9" r="1" fill="currentColor"/>
+        </svg>
+      </div>
       <div class="card-img">
-        ${b.img
-          ? `<img src="${escapeHtml(b.img)}" alt="${escapeHtml(b.title)}">`
-          : `<span style="font-size:28px;opacity:.35;">📷</span>`
-        }
+        ${b.img ? `<img src="${escapeHtml(b.img)}" alt="${escapeHtml(b.title)}">` : `<span style="font-size:28px;opacity:.35;">📷</span>`}
       </div>
       <div class="card-body">
         <h3>${escapeHtml(b.title)}</h3>
@@ -1775,8 +1992,8 @@ function renderDetailImgList() {
 }
 
 // 複製編輯器內的程式碼
-function copyEditorCode() {
-  const ta = document.getElementById('f_code');
+function copyEditorCode(fieldId) {
+  const ta = document.getElementById(fieldId || 'f_code');
   if (!ta) return;
   navigator.clipboard.writeText(ta.value).then(() => showToast('✅ 已複製程式碼', 'ok'));
 }
@@ -1906,91 +2123,261 @@ function renderTutorial() {
 }
 
 // ============================================================
-// 問題紀錄（卡片排版，同區塊語法）
+// 問題紀錄（緊湊列表 C 方案）
 // ============================================================
 function renderIssuesCore(containerId) {
   const c = document.getElementById(containerId);
   if (!c) return;
   if (!DATA.issues || !DATA.issues.length) {
-    c.innerHTML = `<div style="padding:40px;text-align:center;color:var(--ink-mute);font-size:13px;">尚無問題紀錄</div>`;
+    c.innerHTML = `
+      <div style="padding:40px;text-align:center;color:var(--ink-mute);font-size:13px;">尚無問題紀錄</div>
+      <button class="add-block-btn" onclick="openIssueEditor(null)">＋ 新增問題紀錄</button>`;
     return;
   }
   c.innerHTML = `
-    <div class="cards-grid">
+    <div class="issue-list" id="issueList_${containerId}">
       ${DATA.issues.map(issue => `
-        <div class="card" onclick="openIssueEditor('${issue.id}')">
-          <div class="card-img">
-            ${issue.img
-              ? `<img src="${escapeHtml(issue.img)}" alt="${escapeHtml(issue.t)}">`
-              : `<span style="font-size:28px;opacity:.35;">📷</span>`
-            }
-          </div>
-          <div class="card-body">
-            <h3>${escapeHtml(issue.t)}</h3>
-            <div class="card-desc">${escapeHtml(issue.desc || '（無說明）')}</div>
-            ${issue.cat ? `<span class="card-tag">${escapeHtml(issue.cat)}</span>` : ''}
+        <div class="issue-compact" draggable="true" data-id="${issue.id}"
+          onclick="openIssueModal('${issue.id}')"
+          ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
+          <div class="issue-compact-inner">
+            <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
+              <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
+                <circle cx="3" cy="3" r="1.2" fill="currentColor"/><circle cx="7" cy="3" r="1.2" fill="currentColor"/>
+                <circle cx="3" cy="8" r="1.2" fill="currentColor"/><circle cx="7" cy="8" r="1.2" fill="currentColor"/>
+                <circle cx="3" cy="13" r="1.2" fill="currentColor"/><circle cx="7" cy="13" r="1.2" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="issue-thumbs">
+              <div class="issue-thumb">
+                ${issue.imgBefore ? `<img src="${escapeHtml(issue.imgBefore)}" alt="before">` : `<span style="opacity:.3;font-size:16px;">📷</span>`}
+              </div>
+              <div class="issue-arrow">→</div>
+              <div class="issue-thumb">
+                ${issue.imgAfter ? `<img src="${escapeHtml(issue.imgAfter)}" alt="after">` : `<span style="opacity:.3;font-size:16px;">📷</span>`}
+              </div>
+            </div>
+            <div class="issue-info">
+              <h4>${escapeHtml(issue.t)}</h4>
+              <p>${escapeHtml(issue.desc || '點擊查看詳情')}</p>
+            </div>
+            ${issue.cat ? `<span class="card-tag" style="flex-shrink:0;">${escapeHtml(issue.cat)}</span>` : ''}
           </div>
         </div>
       `).join('')}
     </div>
-    <button class="add-block-btn" onclick="openIssueEditor(null)" style="margin-top:4px;">＋ 新增問題紀錄</button>
+    <button class="add-block-btn" onclick="openIssueEditor(null)">＋ 新增問題紀錄</button>
   `;
+  // drag handle hover
+  c.querySelectorAll('.issue-compact').forEach(row => {
+    row.addEventListener('mouseenter', () => { const h = row.querySelector('.drag-handle'); if(h) h.style.opacity='1'; });
+    row.addEventListener('mouseleave', () => { const h = row.querySelector('.drag-handle'); if(h) h.style.opacity='0'; });
+  });
 }
 
 function renderIssues() { renderIssuesCore('issuesContainer'); }
 
-function openIssueEditor(id) {
-  const issue = id ? DATA.issues.find(x => String(x.id) === String(id)) : null;
-  EDITOR_CTX = { type: 'issue', id: issue ? issue.id : null, tempImg: issue ? (issue.img || '') : '' };
+// 問題圖記：點列表開「檢視 Modal」
+function openIssueModal(id) {
+  const issue = DATA.issues.find(x => String(x.id) === String(id));
+  if (!issue) return;
 
-  document.getElementById('editorTitle').innerHTML = issue
-    ? `<input id="f_title" value="${escapeAttr(issue.t)}" placeholder="問題標題"
-        style="border:none;background:transparent;font-size:16px;font-weight:700;
-        font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`
-    : `<input id="f_title" placeholder="問題標題"
-        style="border:none;background:transparent;font-size:16px;font-weight:700;
-        font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`;
+  // 用 editorOverlay 顯示，但內容是 view mode
+  EDITOR_CTX = { type: 'issue_view', id };
+  document.getElementById('editorTitle').innerHTML = `
+    <span style="font-size:16px;font-weight:700;">${escapeHtml(issue.t)}</span>
+    <button class="btn" onclick="openIssueEditor('${id}')" style="font-size:12px;padding:5px 12px;margin-left:10px;">✏️ 編輯</button>
+  `;
+  document.getElementById('editorDeleteBtn').style.display = 'none';
 
-  document.getElementById('editorDeleteBtn').style.display = issue ? 'inline-flex' : 'none';
-  const imgSrc = EDITOR_CTX.tempImg;
+  const codeLines = buildDiffLines(issue.codeBefore || '', issue.codeAfter || '');
 
   document.getElementById('editorBody').innerHTML = `
-    <div class="form-group">
-      <label>預覽圖片</label>
-      <div class="editor-img-zone" id="editorImgZone" onclick="triggerImgUpload()">
-        ${imgSrc
-          ? `<img src="${escapeHtml(imgSrc)}" alt="預覽圖" id="editorImgEl">
+    <!-- Before / After 圖片 -->
+    <div class="ba-row">
+      <div>
+        <div class="ba-label-row">
+          <label class="field-label" style="margin:0;color:#f87171;">Before</label>
+        </div>
+        <div class="ba-zone" onclick="if(this.dataset.src) openLightboxSrc(this.dataset.src)"
+          data-src="${escapeAttr(issue.imgBefore || '')}">
+          ${issue.imgBefore
+            ? `<img src="${escapeHtml(issue.imgBefore)}" alt="before"><div class="img-overlay"><button class="img-action-btn" onclick="event.stopPropagation();openLightboxSrc('${escapeAttr(issue.imgBefore)}')">🔍 放大</button></div>`
+            : `<span style="font-size:22px;opacity:.3;">📷</span>`}
+        </div>
+      </div>
+      <div>
+        <div class="ba-label-row">
+          <label class="field-label" style="margin:0;color:#4ade80;">After</label>
+        </div>
+        <div class="ba-zone" onclick="if(this.dataset.src) openLightboxSrc(this.dataset.src)"
+          data-src="${escapeAttr(issue.imgAfter || '')}">
+          ${issue.imgAfter
+            ? `<img src="${escapeHtml(issue.imgAfter)}" alt="after"><div class="img-overlay"><button class="img-action-btn" onclick="event.stopPropagation();openLightboxSrc('${escapeAttr(issue.imgAfter)}')">🔍 放大</button></div>`
+            : `<span style="font-size:22px;opacity:.3;">📷</span>`}
+        </div>
+      </div>
+    </div>
+
+    <!-- 說明 -->
+    ${issue.desc ? `<div style="font-size:13px;color:var(--ink-soft);margin-bottom:14px;line-height:1.6;">${escapeHtml(issue.desc)}</div>` : ''}
+    ${issue.detail ? `<div style="font-size:13px;color:var(--ink-soft);margin-bottom:14px;line-height:1.6;white-space:pre-wrap;">${escapeHtml(issue.detail)}</div>` : ''}
+
+    <!-- Diff code -->
+    ${(issue.codeBefore || issue.codeAfter) ? `
+    <div class="diff-wrap">
+      <div class="diff-tabs">
+        <button class="diff-tab on" onclick="switchDiffTab(0,this)">Diff</button>
+        <button class="diff-tab" onclick="switchDiffTab(1,this)">Before</button>
+        <button class="diff-tab" onclick="switchDiffTab(2,this)">After</button>
+      </div>
+      <div class="diff-body on" id="dt0">${codeLines}</div>
+      <div class="diff-body" id="dt1"><pre style="padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#e6e6e6;line-height:1.7;">${escapeHtml(issue.codeBefore||'')}</pre></div>
+      <div class="diff-body" id="dt2"><pre style="padding:12px 14px;font-family:'JetBrains Mono',monospace;font-size:12px;color:#e6e6e6;line-height:1.7;">${escapeHtml(issue.codeAfter||'')}</pre></div>
+    </div>` : ''}
+  `;
+
+  // 底部改成「關閉」+ 「編輯」
+  document.getElementById('editorSaveBtn').style.display = 'none';
+  document.getElementById('editorDeleteBtn').style.display = 'none';
+  document.getElementById('editorOverlay').classList.add('open');
+}
+
+function closeEditor() {
+  document.getElementById('editorOverlay').classList.remove('open');
+  // 恢復儲存按鈕
+  const saveBtn = document.getElementById('editorSaveBtn');
+  if (saveBtn) saveBtn.style.display = 'inline-flex';
+  EDITOR_CTX = null;
+}
+
+function switchDiffTab(i, btn) {
+  document.querySelectorAll('.diff-tab').forEach((t,j) => t.classList.toggle('on', j===i));
+  document.querySelectorAll('.diff-body').forEach((b,j) => b.classList.toggle('on', j===i));
+}
+
+// 產生 diff lines（簡易逐行比對）
+function buildDiffLines(before, after) {
+  const bLines = before.split('\n');
+  const aLines = after.split('\n');
+  const maxLen = Math.max(bLines.length, aLines.length);
+  let html = '';
+  for (let i = 0; i < maxLen; i++) {
+    const b = bLines[i]; const a = aLines[i];
+    if (b === a || (b === undefined && a === undefined)) {
+      html += `<div class="diff-line"><span class="diff-sign"> </span><span>${escapeHtml(b||'')}</span></div>`;
+    } else {
+      if (b !== undefined) html += `<div class="diff-line del"><span class="diff-sign">−</span><span>${escapeHtml(b)}</span></div>`;
+      if (a !== undefined) html += `<div class="diff-line add"><span class="diff-sign">+</span><span>${escapeHtml(a)}</span></div>`;
+    }
+  }
+  return html;
+}
+
+function openIssueEditor(id) {
+  const issue = id ? DATA.issues.find(x => String(x.id) === String(id)) : null;
+  EDITOR_CTX = { type: 'issue', id: issue ? issue.id : null,
+    tempImgBefore: issue ? (issue.imgBefore || '') : '',
+    tempImgAfter: issue ? (issue.imgAfter || '') : ''
+  };
+
+  document.getElementById('editorTitle').innerHTML = issue
+    ? `<input id="f_title" value="${escapeAttr(issue.t)}" placeholder="問題標題" style="border:none;background:transparent;font-size:16px;font-weight:700;font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`
+    : `<input id="f_title" placeholder="問題標題" style="border:none;background:transparent;font-size:16px;font-weight:700;font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`;
+
+  document.getElementById('editorDeleteBtn').style.display = issue ? 'inline-flex' : 'none';
+
+  const mkZone = (key, label, color, src) => `
+    <div>
+      <label class="field-label" style="color:${color};">${label}</label>
+      <div class="ba-zone" id="zone_${key}" onclick="triggerBAUpload('${key}')">
+        ${src
+          ? `<img src="${escapeHtml(src)}" alt="${label}" id="baImg_${key}">
              <div class="img-overlay">
-               <button class="img-action-btn" onclick="event.stopPropagation();openLightboxSrc('${escapeAttr(imgSrc)}')">🔍 放大</button>
-               <button class="img-action-btn danger" onclick="event.stopPropagation();removeEditorImg()">🗑 刪除</button>
-               <button class="img-action-btn" onclick="event.stopPropagation();triggerImgUpload()">↑ 換圖</button>
+               <button class="img-action-btn" onclick="event.stopPropagation();openLightboxSrc('${escapeAttr(src)}')">🔍</button>
+               <button class="img-action-btn danger" onclick="event.stopPropagation();removeBAImg('${key}')">🗑</button>
+               <button class="img-action-btn" onclick="event.stopPropagation();triggerBAUpload('${key}')">↑</button>
              </div>`
-          : `<div class="img-placeholder">
-               <span class="icon">📷</span><span>點擊上傳圖片</span>
-               <span style="font-size:11px;color:var(--ink-mute);">JPG、PNG、GIF、WebP</span>
-             </div>`
+          : `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink-mute);font-size:13px;"><span style="font-size:24px;opacity:.35;">📷</span><span>${label}</span></div>`
         }
       </div>
-      <input type="file" id="imgFileInput" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none;" onchange="handleImgUpload(event)">
+      <input type="file" id="baInput_${key}" accept="image/*" style="display:none;" onchange="handleBAUpload(event,'${key}')">
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
-      <div>
-        <label class="field-label">分類</label>
-        <input id="f_cat" value="${issue ? escapeAttr(issue.cat || '') : ''}" placeholder="例：RWD、Outlook…"
-          style="width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--ink);">
-      </div>
+  `;
+
+  document.getElementById('editorBody').innerHTML = `
+    <div class="ba-row">
+      ${mkZone('before','Before','#f87171', EDITOR_CTX.tempImgBefore)}
+      ${mkZone('after','After','#4ade80', EDITOR_CTX.tempImgAfter)}
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 120px;gap:12px;margin-bottom:14px;">
       <div>
         <label class="field-label">簡短說明</label>
-        <input id="f_desc" value="${issue ? escapeAttr(issue.desc || '') : ''}" placeholder="一句話說明問題"
-          style="width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--ink);">
+        <input id="f_desc" value="${issue ? escapeAttr(issue.desc||'') : ''}" placeholder="一句話說明問題" style="width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--ink);">
+      </div>
+      <div>
+        <label class="field-label">分類</label>
+        <input id="f_cat" value="${issue ? escapeAttr(issue.cat||'') : ''}" placeholder="rwd / layout…" style="width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--ink);">
       </div>
     </div>
+
     <div class="form-group">
       <label class="field-label">詳細描述</label>
-      <textarea id="f_detail" style="font-family:inherit;font-size:14px;min-height:100px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);resize:vertical;" placeholder="問題描述、重現步驟、解法...">${issue ? escapeHtml(issue.detail || '') : ''}</textarea>
+      <textarea id="f_detail" style="font-family:inherit;font-size:14px;min-height:80px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);resize:vertical;" placeholder="原因說明、重現步驟、解法...">${issue ? escapeHtml(issue.detail||'') : ''}</textarea>
+    </div>
+
+    <div class="form-group">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <label class="field-label" style="margin:0;color:#f87171;">Before Code</label>
+      </div>
+      <div class="code-field-wrap">
+        <textarea id="f_codeBefore" style="font-size:12px;font-family:'JetBrains Mono',monospace;min-height:100px;resize:vertical;" placeholder="修改前的 code...">${issue ? escapeHtml(issue.codeBefore||'') : ''}</textarea>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <label class="field-label" style="margin:0;color:#4ade80;">After Code</label>
+        <button class="btn" onclick="copyEditorCode('f_codeAfter')" style="font-size:11px;padding:4px 10px;color:var(--ink-mute);">📋 複製</button>
+      </div>
+      <div class="code-field-wrap">
+        <textarea id="f_codeAfter" style="font-size:12px;font-family:'JetBrains Mono',monospace;min-height:100px;resize:vertical;" placeholder="修改後的 code...">${issue ? escapeHtml(issue.codeAfter||'') : ''}</textarea>
+      </div>
     </div>
   `;
   document.getElementById('editorOverlay').classList.add('open');
+}
+
+function triggerBAUpload(key) {
+  document.getElementById(`baInput_${key}`).click();
+}
+
+function handleBAUpload(e, key) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    EDITOR_CTX[`tempImg${key.charAt(0).toUpperCase()+key.slice(1)}`] = evt.target.result;
+    const zone = document.getElementById(`zone_${key}`);
+    zone.innerHTML = `
+      <img src="${evt.target.result}" id="baImg_${key}">
+      <div class="img-overlay">
+        <button class="img-action-btn" onclick="event.stopPropagation();openLightboxSrc('${escapeAttr(evt.target.result)}')">🔍</button>
+        <button class="img-action-btn danger" onclick="event.stopPropagation();removeBAImg('${key}')">🗑</button>
+        <button class="img-action-btn" onclick="event.stopPropagation();triggerBAUpload('${key}')">↑</button>
+      </div>`;
+    showToast('✅ 圖片已載入', 'ok');
+  };
+  reader.readAsDataURL(file);
+  e.target.value = '';
+}
+
+function removeBAImg(key) {
+  EDITOR_CTX[`tempImg${key.charAt(0).toUpperCase()+key.slice(1)}`] = '';
+  const zone = document.getElementById(`zone_${key}`);
+  const label = key === 'before' ? 'Before' : 'After';
+  zone.innerHTML = `<div style="display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--ink-mute);font-size:13px;"><span style="font-size:24px;opacity:.35;">📷</span><span>${label}</span></div>`;
 }
 
 // ============================================================
@@ -2032,13 +2419,16 @@ function editorSave() {
     const cat = document.getElementById('f_cat') ? document.getElementById('f_cat').value.trim() : '';
     const desc = document.getElementById('f_desc') ? document.getElementById('f_desc').value.trim() : '';
     const detail = document.getElementById('f_detail') ? document.getElementById('f_detail').value : '';
+    const codeBefore = document.getElementById('f_codeBefore') ? document.getElementById('f_codeBefore').value : '';
+    const codeAfter = document.getElementById('f_codeAfter') ? document.getElementById('f_codeAfter').value : '';
     if (!title) { showToast('標題不可為空', 'err'); titleEl && titleEl.focus(); return; }
-    const img = EDITOR_CTX.tempImg || '';
+    const imgBefore = EDITOR_CTX.tempImgBefore || '';
+    const imgAfter = EDITOR_CTX.tempImgAfter || '';
     if (EDITOR_CTX.id) {
       const issue = DATA.issues.find(x => String(x.id) === String(EDITOR_CTX.id));
-      if (issue) { issue.t = title; issue.cat = cat; issue.desc = desc; issue.detail = detail; issue.img = img; }
+      if (issue) { issue.t = title; issue.cat = cat; issue.desc = desc; issue.detail = detail; issue.codeBefore = codeBefore; issue.codeAfter = codeAfter; issue.imgBefore = imgBefore; issue.imgAfter = imgAfter; }
     } else {
-      DATA.issues.push({ id: 'i' + Date.now(), t: title, cat, desc, detail, img });
+      DATA.issues.push({ id: 'i' + Date.now(), t: title, cat, desc, detail, codeBefore, codeAfter, imgBefore, imgAfter });
     }
     saveLocal(); renderIssues(); renderIssuesCore('issuesContainer2');
   }
@@ -2063,11 +2453,6 @@ function editorDelete() {
   scheduleSync();
   closeEditor();
   showToast('已刪除', 'ok');
-}
-
-function closeEditor() {
-  document.getElementById('editorOverlay').classList.remove('open');
-  EDITOR_CTX = null;
 }
 
 // ============================================================
@@ -2113,6 +2498,7 @@ function openGHPanel() {
   document.getElementById('ghOwner').value = g.owner || '';
   document.getElementById('ghRepo').value = g.repo || '';
   document.getElementById('ghFile').value = g.dataFile || 'data.json';
+  document.getElementById('ghHtmlFile').value = g.htmlFile || 'index.html';
   document.getElementById('ghStatusMsg').style.display = 'none';
   document.getElementById('ghOverlay').classList.add('open');
 }
@@ -2138,8 +2524,9 @@ function saveGHSettings() {
   const owner = document.getElementById('ghOwner').value.trim();
   const repo = document.getElementById('ghRepo').value.trim();
   const dataFile = document.getElementById('ghFile').value.trim() || 'data.json';
+  const htmlFile = (document.getElementById('ghHtmlFile') ? document.getElementById('ghHtmlFile').value.trim() : '') || 'index.html';
   if (!token || !owner || !repo) { showToast('請填寫所有欄位', 'err'); return; }
-  localStorage.setItem(LS_GH, JSON.stringify({ token, owner, repo, dataFile }));
+  localStorage.setItem(LS_GH, JSON.stringify({ token, owner, repo, dataFile, htmlFile }));
   closeGHPanel();
   showToast('✅ 設定已儲存', 'ok');
   updateGHButtons();
@@ -2150,6 +2537,7 @@ function updateGHButtons() {
   const hasConfig = !!(g.token && g.owner && g.repo);
   document.getElementById('btnPull').style.display = hasConfig ? 'inline-flex' : 'none';
   document.getElementById('btnPush').style.display = hasConfig ? 'inline-flex' : 'none';
+  document.getElementById('btnPushHTML').style.display = hasConfig ? 'inline-flex' : 'none';
   const pill = document.getElementById('statusPill');
   if (hasConfig) {
     pill.innerHTML = '<div class="status-dot"></div> 已連線';
@@ -2203,6 +2591,66 @@ async function ghPush() {
     setPillState('err');
     showToast('❌ 推送失敗：' + e.message, 'err');
     console.error('ghPush error', e);
+  }
+}
+
+// 推送整份 index.html 到 GitHub
+async function ghPushHTML() {
+  const g = getGH();
+  if (!g.token) { showToast('請先設定 GitHub Token', 'err'); return; }
+  const htmlFile = g.htmlFile || 'index.html';
+  if (!confirm(`確定要把目前這份工具上傳到 GitHub 的 ${htmlFile}？\n這會覆蓋 Repo 上的舊版本。`)) return;
+
+  setPillState('syncing');
+  try {
+    // 取得目前頁面完整 HTML
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    // 轉 base64（支援中文）
+    const b64 = btoa(unescape(encodeURIComponent(html)));
+
+    // 取得現有 SHA
+    const urlFile = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${htmlFile}`;
+    let sha = null;
+    try {
+      const r = await fetch(urlFile, {
+        headers: { Authorization: `token ${g.token}`, Accept: 'application/vnd.github+json' }
+      });
+      if (r.ok) { const d = await r.json(); sha = d.sha; }
+    } catch(e) {}
+
+    const body = {
+      message: `🛠 Update ${htmlFile} — ${new Date().toLocaleString('zh-TW')}`,
+      content: b64,
+      ...(sha ? { sha } : {})
+    };
+
+    const res = await fetch(urlFile, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${g.token}`,
+        Accept: 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || `HTTP ${res.status}`);
+    }
+
+    setPillState('ok');
+    const pagesUrl = `https://${g.owner.toLowerCase()}.github.io/${g.repo}/`;
+    showToast('✅ 已上傳新版工具到 GitHub！', 'ok');
+    // 提示 Pages 網址
+    setTimeout(() => {
+      showToast(`🌐 ${pagesUrl}`, 'ok');
+    }, 2800);
+
+  } catch(e) {
+    setPillState('err');
+    showToast('❌ 上傳失敗：' + e.message, 'err');
+    console.error('ghPushHTML error', e);
   }
 }
 
@@ -2305,6 +2753,73 @@ function scheduleSync() {
   }, 2000);
 }
 
+// ============================================================
+// Drag & Drop 排序
+// ============================================================
+let DRAG_ID = null;
+let DRAG_TYPE = null;
+
+function dragStart(e, type) {
+  DRAG_ID = e.currentTarget.dataset.id;
+  DRAG_TYPE = type;
+  e.currentTarget.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'move';
+}
+
+function dragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'move';
+  const el = e.currentTarget;
+  if (el.dataset.id !== DRAG_ID) el.classList.add('drag-over');
+}
+
+function dropOn(e, type) {
+  e.preventDefault();
+  const targetId = e.currentTarget.dataset.id;
+  if (!targetId || targetId === DRAG_ID) return;
+  e.currentTarget.classList.remove('drag-over');
+
+  if (type === 'block') {
+    const arr = DATA.blocks;
+    const fromIdx = arr.findIndex(x => x.id === DRAG_ID);
+    const toIdx = arr.findIndex(x => x.id === targetId);
+    if (fromIdx < 0 || toIdx < 0) return;
+    arr.splice(toIdx, 0, arr.splice(fromIdx, 1)[0]);
+    saveLocal(); renderBlocks();
+  } else if (type === 'issue') {
+    const arr = DATA.issues;
+    const fromIdx = arr.findIndex(x => String(x.id) === String(DRAG_ID));
+    const toIdx = arr.findIndex(x => String(x.id) === String(targetId));
+    if (fromIdx < 0 || toIdx < 0) return;
+    arr.splice(toIdx, 0, arr.splice(fromIdx, 1)[0]);
+    saveLocal(); renderIssues();
+  }
+  scheduleSync();
+}
+
+function dragEnd(e) {
+  e.currentTarget.classList.remove('dragging');
+  document.querySelectorAll('.drag-over').forEach(el => el.classList.remove('drag-over'));
+  DRAG_ID = null; DRAG_TYPE = null;
+}
+
+// ============================================================
+// 手機側邊欄
+// ============================================================
+function toggleMobileSidebar() {
+  const sb = document.getElementById('sidebar');
+  const ov = document.getElementById('sidebarOverlay');
+  const hidden = sb.classList.toggle('mobile-hidden');
+  ov.classList.toggle('show', !hidden);
+}
+
+// 初始化：小螢幕預設隱藏側邊欄
+function initMobile() {
+  if (window.innerWidth <= 900) {
+    document.getElementById('sidebar').classList.add('mobile-hidden');
+  }
+}
+
 function closeVersionPanel() {
   document.getElementById('versionOverlay').classList.remove('open');
 }
@@ -2343,6 +2858,7 @@ loadLocal();
 renderAll();
 updateTimestamp();
 updateGHButtons();
+initMobile();
 document.getElementById('subtabs-syntax').style.display = 'flex';
 </script>
 </body>
