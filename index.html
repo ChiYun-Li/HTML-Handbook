@@ -3,30 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Reallusion HTML Email 工作手冊</title>
+<title>Reallusion HTML Email 工作手冊 v3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #faf7f2;
+  --bg: #f5f2ed;
   --bg-card: #ffffff;
   --ink: #1a1a1a;
   --ink-soft: #555;
-  --ink-mute: #888;
-  --line: #e8e3d8;
+  --ink-mute: #999;
+  --line: #e5e0d6;
   --accent: #d94f2b;
   --accent-soft: #fde9e2;
-  --gold: #c9a96e;
   --ok: #2d8659;
   --warn: #c07d20;
   --err: #c0392b;
   --code-bg: #0f1419;
   --code-ink: #e6e6e6;
-  --shadow-sm: 0 1px 2px rgba(26,26,26,0.06);
-  --shadow-md: 0 4px 12px rgba(26,26,26,0.08);
-  --shadow-lg: 0 12px 40px rgba(26,26,26,0.12);
-  --radius: 10px;
+  --sidebar-w: 210px;
+  --header-h: 56px;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -37,84 +34,75 @@ body {
   color: var(--ink);
   line-height: 1.7;
   font-size: 15px;
-  min-height: 100vh;
-  background-image:
-    radial-gradient(circle at 20% 10%, rgba(217, 79, 43, 0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(201, 169, 110, 0.05) 0%, transparent 50%);
 }
 
 code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
 
-/* ======== Header ======== */
-header.hero {
-  padding: 60px 40px 40px;
-  border-bottom: 1px solid var(--line);
-  background: var(--bg-card);
-  position: relative;
-  overflow: hidden;
-}
-header.hero::before {
-  content: '';
-  position: absolute;
-  top: -50%; right: -10%;
-  width: 400px; height: 400px;
-  background: radial-gradient(circle, var(--accent-soft) 0%, transparent 70%);
-  z-index: 0;
-}
-header.hero > * { position: relative; z-index: 1; }
-
-.hero-eyebrow {
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  color: var(--accent);
-  font-weight: 700;
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.hero h1 {
-  font-size: 38px;
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  color: var(--ink);
-  margin-bottom: 10px;
-}
-.hero p.sub {
-  font-size: 15px;
-  color: var(--ink-soft);
-  max-width: 600px;
-}
-
-.hero-meta {
-  display: flex;
-  gap: 20px;
-  margin-top: 24px;
-  font-size: 13px;
-  color: var(--ink-mute);
-  flex-wrap: wrap;
-  align-items: center;
-}
-.hero-meta span { display: inline-flex; align-items: center; gap: 6px; }
-.dot { width: 6px; height: 6px; border-radius: 50%; background: var(--ok); display: inline-block; }
-.dot.warn { background: var(--warn); }
-.dot.err { background: var(--err); }
-.dot.idle { background: var(--ink-mute); }
-
-/* ======== Toolbar ======== */
-.toolbar {
-  position: sticky;
+/* ======== 全站 Header ======== */
+.top-header {
+  position: fixed;
   top: 0;
-  z-index: 100;
-  background: rgba(250, 247, 242, 0.95);
-  backdrop-filter: blur(10px);
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  background: var(--bg-card);
   border-bottom: 1px solid var(--line);
-  padding: 12px 40px;
   display: flex;
-  gap: 10px;
   align-items: center;
-  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 200;
+  gap: 16px;
 }
+
+.header-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+.header-icon {
+  width: 28px;
+  height: 28px;
+  background: var(--ink);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  line-height: 1;
+}
+
+.header-title {
+  font-size: 15px;
+  font-weight: 900;
+  color: var(--ink);
+  letter-spacing: -0.02em;
+}
+
+.header-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--line);
+}
+
+.header-subtitle {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
 .btn {
-  padding: 8px 16px;
+  padding: 7px 14px;
   border: 1px solid var(--line);
   background: var(--bg-card);
   color: var(--ink);
@@ -126,284 +114,414 @@ header.hero > * { position: relative; z-index: 1; }
   font-family: inherit;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
+  white-space: nowrap;
 }
-.btn:hover { border-color: var(--ink); transform: translateY(-1px); box-shadow: var(--shadow-sm); }
-.btn.primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+.btn:hover { border-color: var(--ink); background: var(--bg); }
+.btn.primary { background: var(--ink); color: #fff; border-color: var(--ink); }
 .btn.primary:hover { background: var(--accent); border-color: var(--accent); }
 .btn.accent { background: var(--accent); color: #fff; border-color: var(--accent); }
 .btn.accent:hover { background: #b83e1f; }
-.btn.ghost { background: transparent; border-color: transparent; }
-.btn.ghost:hover { background: var(--bg-card); border-color: var(--line); }
-.btn.sm { padding: 6px 12px; font-size: 12px; }
-.btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
-.sync-indicator {
-  margin-left: auto;
+.status-pill {
   padding: 6px 12px;
+  border: 1.5px solid var(--ok);
+  background: #f0faf5;
+  color: var(--ok);
+  border-radius: 20px;
   font-size: 12px;
-  color: var(--ink-mute);
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  cursor: default;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  background: var(--ok);
+  border-radius: 50%;
+}
+
+/* ======== 側邊欄 ======== */
+:root {
+  --sidebar-w: 210px;
+  --sidebar-collapsed-w: 52px;
+}
+
+.sidebar {
+  width: var(--sidebar-w);
+  background: var(--bg-card);
+  border-right: 1px solid var(--line);
+  position: fixed;
+  left: 0;
+  top: var(--header-h);
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  z-index: 100;
+  transition: width 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+.sidebar.collapsed {
+  width: var(--sidebar-collapsed-w);
+}
+
+.sidebar.collapsed ~ .main-container {
+  margin-left: var(--sidebar-collapsed-w);
+}
+
+/* 頂部列：搜尋 + 收合 */
+.sidebar-toprow {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  padding: 12px 10px 8px;
+  flex-shrink: 0;
+  border-bottom: 1px solid var(--line);
+}
+
+/* 搜尋框包裝（含 icon）*/
+.search-wrap {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.search-wrap .search-icon {
+  position: absolute;
+  left: 9px;
+  color: var(--ink-mute);
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.sidebar-toprow .sidebar-search {
+  width: 100%;
+  padding: 7px 10px 7px 30px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 12.5px;
+  background: var(--bg);
+  font-family: inherit;
+  color: var(--ink);
+  transition: border-color 0.15s;
+}
+
+.sidebar-toprow .sidebar-search::placeholder { color: var(--ink-mute); }
+.sidebar-toprow .sidebar-search:focus { outline: none; border-color: var(--accent); }
+
+/* collapsed 時搜尋區隱藏 */
+.sidebar.collapsed .sidebar-toprow { justify-content: center; padding: 12px 0 8px; }
+.sidebar.collapsed .sidebar-toprow .search-wrap { display: none; }
+
+/* 收合按鈕 */
+.sidebar-toggle-btn {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  cursor: pointer;
+  color: var(--ink-mute);
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.sidebar-toggle-btn:hover { background: var(--bg-card); color: var(--ink); border-color: var(--ink-soft); }
+
+/* panel icon：收合後填色左欄，表示收起狀態 */
+.sidebar-toggle-btn .toggle-icon { display: block; transition: all 0.22s; }
+.sidebar.collapsed .sidebar-toggle-btn .toggle-icon { color: var(--accent); }
+
+.sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 6px 0 12px;
+}
+
+.sidebar-menu { list-style: none; }
+.sidebar-menu li { display: block; }
+
+.sidebar-menu button {
+  width: 100%;
+  padding: 9px 16px 9px 14px;
+  border: none;
+  background: transparent;
+  color: var(--ink-soft);
+  font-size: 13.5px;
+  text-align: left;
+  cursor: pointer;
+  font-family: inherit;
+  transition: background 0.15s, color 0.15s;
+  font-weight: 500;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.sidebar-menu button .nav-icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.sidebar-menu button .nav-label {
+  flex: 1;
+  transition: opacity 0.15s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sidebar.collapsed .sidebar-menu button .nav-label { opacity: 0; pointer-events: none; }
+
+.sidebar-menu button:hover { background: var(--bg); color: var(--ink); }
+
+.sidebar-menu button.active {
+  background: var(--accent-soft);
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.sidebar-menu button.active::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  border-radius: 0 2px 2px 0;
+}
+
+/* tooltip when collapsed */
+.sidebar.collapsed .sidebar-menu button {
+  justify-content: center;
+  padding: 9px 0;
+}
+
+.sidebar.collapsed .sidebar-menu button.active::before {
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  bottom: auto;
+}
+
+.sidebar-footer {
+  padding: 12px 10px;
+  border-top: 1px solid var(--line);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.sidebar.collapsed .sidebar-footer-inner { display: none; }
+
+.sidebar-search {
+  width: 100%;
+  padding: 8px 11px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  font-size: 13px;
+  background: var(--bg);
+  font-family: inherit;
+  color: var(--ink);
+  transition: border-color 0.15s;
+}
+
+.sidebar-search::placeholder { color: var(--ink-mute); }
+.sidebar-search:focus { outline: none; border-color: var(--accent); }
+
+.sidebar-timestamp {
+  margin-top: 8px;
+  font-size: 11px;
+  color: var(--ink-mute);
   font-family: 'JetBrains Mono', monospace;
 }
 
-/* ======== Navigation Tabs ======== */
-.tabs {
+/* ======== 主內容區 ======== */
+.main-container {
+  margin-left: var(--sidebar-w);
+  margin-top: var(--header-h);
+  min-height: calc(100vh - var(--header-h));
+  display: flex;
+  flex-direction: column;
+  transition: margin-left 0.22s cubic-bezier(0.4,0,0.2,1);
+}
+
+/* ======== Sub-tab 列 ======== */
+.subtab-bar {
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--line);
+  padding: 0 36px;
   display: flex;
   gap: 0;
-  padding: 0 40px;
-  background: var(--bg-card);
-  border-bottom: 1px solid var(--line);
-  overflow-x: auto;
-  scrollbar-width: none;
+  position: sticky;
+  top: var(--header-h);
+  z-index: 90;
 }
-.tabs::-webkit-scrollbar { display: none; }
-.tab {
+
+.subtab-btn {
   padding: 14px 20px;
+  border: none;
+  background: transparent;
+  color: var(--ink-mute);
   font-size: 14px;
   font-weight: 500;
-  color: var(--ink-soft);
   cursor: pointer;
-  border-bottom: 2px solid transparent;
-  white-space: nowrap;
-  transition: all 0.15s;
-  background: none;
-  border-top: none;
-  border-left: none;
-  border-right: none;
   font-family: inherit;
-}
-.tab:hover { color: var(--ink); }
-.tab.active {
-  color: var(--accent);
-  border-bottom-color: var(--accent);
-  font-weight: 700;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  transition: all 0.15s;
 }
 
-/* ======== Main content ======== */
-main {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 40px;
-}
+.subtab-btn:hover { color: var(--ink); }
+.subtab-btn.active { color: var(--accent); border-bottom-color: var(--accent); font-weight: 700; }
 
-.panel { display: none; animation: fadeIn 0.3s ease; }
-.panel.active { display: block; }
-@keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: translateY(0); }
-}
+/* ======== 主要內容 ======== */
+main { flex: 1; padding: 28px 36px; }
 
-.section-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  margin-bottom: 20px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid var(--line);
-  gap: 12px;
-  flex-wrap: wrap;
-}
-.section-head h2 {
-  font-size: 24px;
-  font-weight: 900;
-  letter-spacing: -0.01em;
-}
-.section-head .subhead {
-  font-size: 13px;
-  color: var(--ink-mute);
-}
+.content-header { margin-bottom: 20px; }
+.content-header h2 { font-size: 22px; font-weight: 900; margin-bottom: 4px; letter-spacing: -0.01em; }
+.content-header .desc { font-size: 13px; color: var(--ink-mute); }
 
-/* ======== Block cards ======== */
-.blocks-grid {
+/* ======== 卡片網格 ======== */
+.cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 16px;
-  margin-bottom: 24px;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
 }
-.block-card {
+
+.card {
   background: var(--bg-card);
   border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 18px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(26,26,26,0.05);
   transition: all 0.2s;
-  position: relative;
-  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  user-select: none;
 }
-.block-card:hover {
-  border-color: var(--ink);
-  box-shadow: var(--shadow-md);
+
+.card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 20px rgba(217,79,43,0.12);
   transform: translateY(-2px);
 }
-.block-card h3 {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: var(--ink);
-}
-.block-card .desc {
-  font-size: 13px;
-  color: var(--ink-soft);
-  margin-bottom: 12px;
-  line-height: 1.6;
-}
-.block-card pre {
-  background: var(--code-bg);
-  color: var(--code-ink);
-  padding: 12px;
-  border-radius: 6px;
-  font-size: 12px;
-  line-height: 1.5;
-  overflow-x: auto;
-  max-height: 200px;
-}
-.card-actions {
-  display: flex;
-  gap: 6px;
-  margin-top: 12px;
-  opacity: 0;
-  transition: opacity 0.15s;
-}
-.block-card:hover .card-actions { opacity: 1; }
 
-/* ======== Syntax table ======== */
-.syn-group { margin-bottom: 28px; }
-.syn-group h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 2px solid var(--accent);
-  display: inline-block;
-}
-.syn-rows { display: flex; flex-direction: column; gap: 8px; }
-.syn-row {
-  display: grid;
-  grid-template-columns: 200px 1fr auto;
-  gap: 16px;
-  padding: 10px 14px;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  align-items: center;
-  transition: all 0.15s;
-}
-.syn-row:hover { border-color: var(--ink); }
-.syn-row code {
-  background: transparent;
-  color: var(--accent);
-  font-weight: 600;
-  font-size: 13px;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background 0.15s;
-}
-.syn-row code:hover { background: var(--accent-soft); }
-.syn-row .label { font-size: 13px; color: var(--ink-soft); }
-
-/* ======== Notes / Checklist / Tutorial ======== */
-.note-card {
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 20px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow-sm);
-}
-.note-card h3 {
-  font-size: 16px;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-.note-card .note-body {
-  font-size: 14px;
-  color: var(--ink-soft);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-.note-card img {
-  max-width: 100%;
-  border-radius: 6px;
-  margin-top: 10px;
-  border: 1px solid var(--line);
-}
-
-.check-item {
-  display: flex;
-  gap: 12px;
-  padding: 12px 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: 8px;
-  margin-bottom: 8px;
-  align-items: flex-start;
-}
-.check-item input[type="checkbox"] {
-  width: 18px; height: 18px;
-  margin-top: 2px;
-  cursor: pointer;
-  accent-color: var(--accent);
-}
-.check-item.done { opacity: 0.5; }
-.check-item.done .check-text { text-decoration: line-through; }
-.check-text { flex: 1; font-size: 14px; }
-.check-actions { display: flex; gap: 4px; }
-
-.tut-section { margin-bottom: 32px; }
-.tut-section > h3 {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 14px;
-  padding: 8px 14px;
-  background: var(--ink);
-  color: var(--bg);
-  border-radius: 6px;
-  display: inline-block;
-}
-.tut-item {
-  background: var(--bg-card);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-  padding: 16px 20px;
-  margin-bottom: 10px;
-  box-shadow: var(--shadow-sm);
-}
-.tut-item h4 {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 6px;
-  color: var(--accent);
-}
-.tut-item .tut-body {
-  font-size: 14px;
-  color: var(--ink-soft);
-  white-space: pre-wrap;
-  word-wrap: break-word;
-}
-
-.add-btn {
+.card-img {
   width: 100%;
-  padding: 12px;
-  border: 2px dashed var(--line);
+  height: 130px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-mute);
+  font-size: 13px;
+  cursor: pointer;
+  transition: all 0.15s;
+  overflow: hidden;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.card-img:hover { background: var(--accent-soft); color: var(--accent); }
+.card-img img { width: 100%; height: 100%; object-fit: cover; }
+
+.card-body { padding: 14px 16px 16px; flex: 1; }
+
+.card h3 { font-size: 14px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+
+.card .card-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
+
+/* ======== 分類篩選列 ======== */
+.filter-bar {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  padding: 6px 0;
+}
+
+.filter-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink-mute);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  margin-right: 2px;
+}
+
+.filter-chip {
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 20px;
   background: transparent;
   color: var(--ink-mute);
-  border-radius: var(--radius);
-  font-size: 14px;
+  font-size: 12.5px;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s;
   font-family: inherit;
-  margin-top: 8px;
+  transition: all 0.15s;
+  white-space: nowrap;
 }
-.add-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
 
-/* ======== Editor / Modal ======== */
+.filter-chip:hover { border-color: var(--ink-soft); color: var(--ink); }
+
+.filter-chip.active {
+  background: var(--ink);
+  color: #fff;
+  border-color: var(--ink);
+  font-weight: 600;
+}
+
+.filter-chip.add-cat {
+  border-style: dashed;
+  color: var(--accent);
+  border-color: #e8b8ac;
+  background: transparent;
+}
+
+.filter-chip.add-cat:hover { background: var(--accent-soft); border-color: var(--accent); }
+
+/* 卡片類別標籤 */
+.card-tag {
+  display: inline-block;
+  padding: 2px 9px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink-mute);
+  margin-top: 6px;
+}
+
+/* ======== Modal（sticky footer 版）======== */
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(26, 26, 26, 0.5);
+  background: rgba(26,26,26,0.45);
   backdrop-filter: blur(4px);
   display: none;
   align-items: center;
@@ -411,22 +529,358 @@ main {
   z-index: 1000;
   padding: 20px;
 }
-.overlay.open { display: flex; animation: fadeIn 0.2s; }
+
+.overlay.open { display: flex; }
+
 .modal {
   background: var(--bg-card);
-  border-radius: var(--radius);
+  border-radius: 12px;
+  max-width: 600px;
+  width: 100%;
+  max-height: 90vh;
+  box-shadow: 0 16px 48px rgba(26,26,26,0.14);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.modal-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 22px 28px 16px;
+  border-bottom: 1px solid var(--line);
+  flex-shrink: 0;
+}
+
+.modal-head h3 { font-size: 16px; font-weight: 700; }
+
+.modal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 28px;
+}
+
+.modal-footer {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  padding: 14px 28px;
+  border-top: 1px solid var(--line);
+  background: var(--bg-card);
+  flex-shrink: 0;
+}
+
+/* Mini Modal（新增類別用）*/
+.mini-modal {
+  background: var(--bg-card);
+  border-radius: 12px;
+  max-width: 380px;
+  width: 100%;
+  box-shadow: 0 16px 48px rgba(26,26,26,0.14);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ======== 編輯器 Modal 圖片區 ======== */
+.editor-img-zone {
+  width: 100%;
+  min-height: 160px;
+  background: var(--bg);
+  border: 1.5px dashed var(--line);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  position: relative;
+  overflow: hidden;
+}
+
+.editor-img-zone:hover { border-color: var(--accent); background: var(--accent-soft); }
+
+.editor-img-zone img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  border-radius: 7px;
+}
+
+.editor-img-zone .img-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,26,26,0.55);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 7px;
+}
+
+.editor-img-zone:hover .img-overlay { display: flex; }
+
+.editor-img-zone .img-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  color: var(--ink-mute);
+  font-size: 13px;
+}
+
+.editor-img-zone .img-placeholder .icon { font-size: 28px; }
+
+.img-action-btn {
+  background: rgba(255,255,255,0.9);
+  border: none;
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  color: var(--ink);
+}
+
+.img-action-btn:hover { background: #fff; }
+.img-action-btn.danger { color: var(--err); }
+
+/* 程式碼區塊（Modal 內）*/
+.code-field-wrap {
+  position: relative;
+}
+
+.code-field-wrap textarea {
+  font-size: 12px !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  min-height: 160px;
+  resize: vertical;
+}
+
+/* Lightbox */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(10,10,10,0.88);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  cursor: zoom-out;
+  padding: 24px;
+}
+
+.lightbox.open { display: flex; }
+
+.lightbox img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 8px;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.6);
+  object-fit: contain;
+  cursor: default;
+}
+
+/* ======== 新增按鈕 ======== */
+.add-block-btn {
+  width: 100%;
+  padding: 16px;
+  border: 1.5px dashed var(--line);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 700;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.add-block-btn:hover { background: var(--accent-soft); border-color: var(--accent); }
+
+/* ======== 語法速查 ======== */
+.syn-section { margin-bottom: 24px; }
+
+.syn-section h3 {
+  font-size: 14px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--accent);
+  display: inline-block;
+  color: var(--ink);
+}
+
+.syn-rows { display: flex; flex-direction: column; gap: 6px; }
+
+.syn-row {
+  display: grid;
+  grid-template-columns: 160px 1fr auto;
+  gap: 12px;
+  padding: 10px 14px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  align-items: center;
+}
+
+.syn-row:hover { border-color: #c8c3b8; }
+
+.syn-row code {
+  background: transparent;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 12px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background 0.15s;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.syn-row code:hover { background: var(--accent-soft); }
+
+/* ======== 筆記卡片 ======== */
+.note-card {
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  transition: all 0.2s;
+}
+
+.note-card:hover { border-color: #c8c3b8; box-shadow: 0 4px 16px rgba(26,26,26,0.07); }
+.note-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+
+.note-card .note-body { font-size: 13px; color: var(--ink-soft); white-space: pre-wrap; line-height: 1.6; }
+
+.note-img {
+  width: 100%;
+  height: 110px;
+  background: var(--bg);
+  border-radius: 6px;
+  margin-bottom: 10px;
+  border: 1px dashed var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--ink-mute);
+  font-size: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: all 0.15s;
+}
+
+.note-img:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--accent); }
+.note-img img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ======== 檢查清單 ======== */
+.check-section { margin-bottom: 24px; }
+.check-section h3 { font-size: 16px; font-weight: 700; margin-bottom: 10px; }
+
+.check-item {
+  padding: 11px 14px;
+  margin-bottom: 6px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  transition: all 0.15s;
+}
+
+.check-item:hover { border-color: #c8c3b8; }
+.check-item input[type="checkbox"] { width: 16px; height: 16px; cursor: pointer; accent-color: var(--accent); }
+.check-item span { font-size: 13px; flex: 1; }
+.check-item.done span { color: var(--ink-mute); text-decoration: line-through; }
+
+/* ======== 教學 ======== */
+.tutorial-section { margin-bottom: 28px; }
+
+.tutorial-title-badge {
+  display: inline-block;
+  padding: 5px 14px;
+  background: var(--ink);
+  color: var(--bg);
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.tutorial-item {
+  margin-top: 8px;
+  padding: 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.tutorial-item h4 { font-size: 13px; font-weight: 700; margin-bottom: 6px; color: var(--accent); }
+.tutorial-item p { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
+
+/* ======== 問題紀錄 ======== */
+.issue-cat-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+  margin-top: 16px;
+}
+
+.issue-cat-label:first-child { margin-top: 0; }
+
+.issue-item {
+  padding: 9px 14px;
+  margin-bottom: 4px;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.issue-item::before { content: '•'; color: var(--accent); font-weight: 700; }
+
+/* ======== Modal ======== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(26,26,26,0.45);
+  backdrop-filter: blur(4px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.overlay.open { display: flex; }
+
+.modal {
+  background: var(--bg-card);
+  border-radius: 12px;
   padding: 28px;
   max-width: 600px;
   width: 100%;
   max-height: 90vh;
   overflow-y: auto;
-  box-shadow: var(--shadow-lg);
-  animation: modalIn 0.25s ease;
+  box-shadow: 0 16px 48px rgba(26,26,26,0.14);
 }
-@keyframes modalIn {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+
 .modal-head {
   display: flex;
   justify-content: space-between;
@@ -435,335 +889,507 @@ main {
   padding-bottom: 12px;
   border-bottom: 1px solid var(--line);
 }
-.modal-head h3 { font-size: 18px; font-weight: 700; }
+
+.modal-head h3 { font-size: 16px; font-weight: 700; }
+
 .close-x {
   background: none;
   border: none;
-  font-size: 24px;
+  font-size: 22px;
   color: var(--ink-mute);
   cursor: pointer;
   line-height: 1;
-  padding: 4px 8px;
+  transition: color 0.15s;
 }
+
 .close-x:hover { color: var(--ink); }
+
 .form-group { margin-bottom: 14px; }
-.form-group label {
+
+.form-group label, .field-label {
   display: block;
-  font-size: 13px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 600;
   margin-bottom: 6px;
   color: var(--ink-soft);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
+
 .form-group input,
 .form-group textarea {
   width: 100%;
   padding: 10px 12px;
   border: 1px solid var(--line);
-  border-radius: 6px;
+  border-radius: 7px;
   font-size: 14px;
   font-family: inherit;
   background: var(--bg);
-  transition: border-color 0.15s;
+  color: var(--ink);
 }
+
 .form-group input:focus,
 .form-group textarea:focus { outline: none; border-color: var(--accent); }
-.form-group textarea { min-height: 100px; resize: vertical; font-family: 'JetBrains Mono', monospace; }
-.form-actions {
-  display: flex;
-  gap: 8px;
-  justify-content: flex-end;
-  margin-top: 18px;
-  padding-top: 14px;
-  border-top: 1px solid var(--line);
+.form-group textarea { min-height: 100px; font-family: 'JetBrains Mono', monospace; resize: vertical; }
+
+/* 詳細描述附圖縮圖 */
+.detail-thumb {
+  width: 60px;
+  height: 60px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 1px solid var(--line);
+  cursor: zoom-in;
+  transition: all 0.15s;
+  flex-shrink: 0;
 }
+
+.detail-thumb:hover { border-color: var(--accent); transform: scale(1.05); }
+
+.detail-thumb-wrap {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.detail-thumb-del {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  width: 18px;
+  height: 18px;
+  background: var(--err);
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  font-size: 11px;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.detail-thumb-wrap:hover .detail-thumb-del { opacity: 1; }
 
 /* ======== Toast ======== */
 .toast {
   position: fixed;
   bottom: 28px;
   left: 50%;
-  transform: translateX(-50%) translateY(100px);
+  transform: translateX(-50%) translateY(120px);
   background: var(--ink);
-  color: var(--bg);
-  padding: 14px 24px;
+  color: #fff;
+  padding: 12px 22px;
   border-radius: 8px;
-  font-size: 14px;
-  font-weight: 500;
+  font-size: 13px;
   z-index: 2000;
-  box-shadow: var(--shadow-lg);
-  transition: transform 0.3s cubic-bezier(0.2, 0.9, 0.3, 1.2);
+  box-shadow: 0 8px 32px rgba(26,26,26,0.15);
+  transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1);
   pointer-events: none;
-  max-width: 80vw;
 }
+
 .toast.show { transform: translateX(-50%) translateY(0); }
 .toast.ok { background: var(--ok); }
 .toast.err { background: var(--err); }
-.toast.warn { background: var(--warn); }
-
-/* ======== GitHub Panel ======== */
-.gh-panel .modal { max-width: 520px; }
-.gh-status {
-  margin-top: 10px;
-  padding: 10px 12px;
-  border-radius: 6px;
-  font-size: 13px;
-  display: none;
-}
-.gh-status.show { display: block; }
-.gh-status.ok { background: #e8f5ed; color: var(--ok); }
-.gh-status.err { background: #fbeae7; color: var(--err); }
-.gh-status.warn { background: #fef4e5; color: var(--warn); }
-.token-row { display: flex; gap: 6px; }
-.token-row input { flex: 1; }
-
-/* ======== Edit mode ======== */
-body.edit-mode .block-card { border-color: var(--accent); }
-body.edit-mode .note-card,
-body.edit-mode .tut-item,
-body.edit-mode .syn-row { border-color: var(--accent); }
-
-.editable-on-hover { cursor: pointer; }
-body.edit-mode .editable-on-hover:hover { background: var(--accent-soft); outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
-
-/* ======== Responsive ======== */
-@media (max-width: 768px) {
-  header.hero { padding: 32px 20px 24px; }
-  .hero h1 { font-size: 28px; }
-  .toolbar { padding: 10px 16px; }
-  .tabs { padding: 0 16px; }
-  main { padding: 24px 16px; }
-  .syn-row { grid-template-columns: 1fr; gap: 4px; }
-  .blocks-grid { grid-template-columns: 1fr; }
-}
 </style>
 </head>
 <body>
 
-<header class="hero">
-  <div class="hero-eyebrow">Reallusion · Internal Handbook</div>
-  <h1>HTML Email 工作手冊</h1>
-  <p class="sub">一份給電子報產製工作者的協作手冊 · 可編輯 · 可同步</p>
-  <div class="hero-meta">
-    <span><span class="dot idle" id="syncDot"></span><span id="syncText">未連線 GitHub</span></span>
-    <span>·</span>
-    <span id="updateTime">載入中…</span>
+<!-- ===== 全站 Header ===== -->
+<header class="top-header">
+  <div class="header-brand">
+    <!-- Logo：三張對話卡片疊放，參考圖二 -->
+    <div class="header-icon" style="background:transparent;padding:0;width:36px;height:32px;position:relative;">
+      <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- 左後紫色卡片 -->
+        <rect x="0" y="4" width="18" height="14" rx="4" fill="#c4b5f0" transform="rotate(-10 4 8)"/>
+        <!-- 右後綠色卡片 -->
+        <rect x="16" y="6" width="18" height="14" rx="4" fill="#b8dea0" transform="rotate(8 24 10)"/>
+        <!-- 前方主白色卡片 -->
+        <rect x="7" y="6" width="20" height="16" rx="4" fill="#ffffff" stroke="#2a2a2a" stroke-width="1.4"/>
+        <!-- 卡片內線條 -->
+        <path d="M11 11h12M11 14.5h12M11 18h7" stroke="#2a2a2a" stroke-width="1.3" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="header-title">HTML Email 工作手冊</div>
+    <div class="header-divider"></div>
+    <div class="header-subtitle">Reallusion · Internal Handbook</div>
+  </div>
+  <div class="header-right">
+    <div class="status-pill" id="statusPill">
+      <div class="status-dot"></div>
+      就緒
+    </div>
+    <button class="btn" id="btnPull" onclick="ghPull()" title="從 GitHub 拉取最新資料" style="display:none;">↓ 拉取</button>
+    <button class="btn" id="btnPush" onclick="ghPush()" title="推送到 GitHub" style="display:none;">↑ 推送</button>
+    <button class="btn" onclick="openGHPanel()">⚙️ 設定</button>
   </div>
 </header>
 
-<div class="toolbar">
-  <button class="btn" id="editToggleBtn" onclick="toggleEditMode()">✏️ 開始編輯</button>
-  <button class="btn ghost" onclick="openGHPanel()">⚙️ GitHub 設定</button>
-  <button class="btn ghost" onclick="openVersionPanel()">🕐 歷史版本</button>
-  <button class="btn ghost" onclick="exportData()">📥 匯出</button>
-  <div class="sync-indicator" id="syncIndicator">就緒</div>
+<!-- ===== 側邊欄 ===== -->
+<aside class="sidebar" id="sidebar">
+
+  <!-- 頂部列：搜尋 + 收合按鈕 -->
+  <div class="sidebar-toprow">
+    <div class="search-wrap">
+      <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
+      </svg>
+      <input type="text" class="sidebar-search" id="globalSearch" placeholder="搜尋全站...">
+    </div>
+    <button class="sidebar-toggle-btn" onclick="toggleSidebar()" title="收合側欄">
+      <!-- sidebar panel icon（圖一那種）-->
+      <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <path d="M9 3v18"/>
+      </svg>
+    </button>
+  </div>
+
+  <nav class="sidebar-nav">
+    <ul class="sidebar-menu">
+      <li><button data-panel="home" onclick="switchPanel('home')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/>
+          </svg>
+        </span>
+        <span class="nav-label">首頁</span>
+      </button></li>
+      <li><button class="active" data-panel="syntax" onclick="switchPanel('syntax')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+        </span>
+        <span class="nav-label">語法庫</span>
+      </button></li>
+      <li><button data-panel="notes" onclick="switchPanel('notes')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/>
+          </svg>
+        </span>
+        <span class="nav-label">UI 規範</span>
+      </button></li>
+      <li><button data-panel="checks" onclick="switchPanel('checks')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+          </svg>
+        </span>
+        <span class="nav-label">Check 清單</span>
+      </button></li>
+      <li><button data-panel="issues" onclick="switchPanel('issues')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/>
+          </svg>
+        </span>
+        <span class="nav-label">注意事項</span>
+      </button></li>
+      <li><button data-panel="tutorial" onclick="switchPanel('tutorial')">
+        <span class="nav-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+          </svg>
+        </span>
+        <span class="nav-label">新手教學</span>
+      </button></li>
+    </ul>
+  </nav>
+
+  <div class="sidebar-footer">
+    <div class="sidebar-footer-inner">
+      <div class="sidebar-timestamp" id="sidebarTimestamp"></div>
+    </div>
+  </div>
+</aside>
+
+<!-- ===== 主容器 ===== -->
+<div class="main-container">
+
+  <!-- Sub-tab bars: 語法庫有三個分頁 -->
+  <div id="subtabs-home" class="subtab-bar" style="display:none;"></div>
+  <div id="subtabs-syntax" class="subtab-bar">
+    <button class="subtab-btn active" onclick="switchSub('blocks-area', this)">區塊語法</button>
+    <button class="subtab-btn" onclick="switchSub('blocks-quick', this)">快速語法</button>
+    <button class="subtab-btn" onclick="switchSub('blocks-issues-sub', this)">問題圖記</button>
+  </div>
+  <div id="subtabs-notes" class="subtab-bar" style="display:none;"></div>
+  <div id="subtabs-checks" class="subtab-bar" style="display:none;"></div>
+  <div id="subtabs-issues" class="subtab-bar" style="display:none;"></div>
+  <div id="subtabs-tutorial" class="subtab-bar" style="display:none;"></div>
+
+  <main>
+    <!-- ===== 首頁（待設計）===== -->
+    <section id="home-panel" class="panel" style="display:none;">
+      <div class="content-header">
+        <h2>首頁</h2>
+        <div class="desc">（設計中）</div>
+      </div>
+    </section>
+
+    <!-- ===== 語法庫（含三個 sub-tab）===== -->
+    <section id="syntax-panel" class="panel">
+
+      <!-- 子區域：區塊語法 -->
+      <div id="blocks-area">
+        <div class="content-header">
+          <h2>區塊語法</h2>
+          <div class="desc">常用的 HTML Email 模組，點選卡片即可編輯</div>
+        </div>
+        <!-- 分類篩選列 -->
+        <div class="filter-bar" id="filterBar"></div>
+        <div class="cards-grid" id="blocksGrid"></div>
+        <button class="add-block-btn" onclick="addNewBlock()">＋ 新增區塊</button>
+      </div>
+
+      <!-- 子區域：快速語法 -->
+      <div id="blocks-quick" style="display:none;">
+        <div class="content-header">
+          <h2>快速語法</h2>
+          <div class="desc">常用 CSS 片段，點擊可複製</div>
+        </div>
+        <div id="synContainer2"></div>
+        <button class="add-block-btn" onclick="addNewSynGroup()" style="margin-top:12px;">＋ 新增分類</button>
+      </div>
+
+      <!-- 子區域：問題圖記 -->
+      <div id="blocks-issues-sub" style="display:none;">
+        <div class="content-header">
+          <h2>問題圖記</h2>
+          <div class="desc">常見問題與解決方案</div>
+        </div>
+        <div id="issuesContainer2"></div>
+      </div>
+
+    </section>
+
+    <!-- ===== UI 規範 ===== -->
+    <section id="notes-panel" class="panel" style="display:none;">
+      <div class="content-header">
+        <h2>UI 規範</h2>
+        <div class="desc">踩雷、小技巧與心得</div>
+      </div>
+      <div id="notesGrid" class="cards-grid"></div>
+      <button class="add-block-btn" onclick="addNewNote()">＋ 新增筆記</button>
+    </section>
+
+    <!-- ===== Check 清單 ===== -->
+    <section id="checks-panel" class="panel" style="display:none;">
+      <div class="content-header">
+        <h2>Check 清單</h2>
+        <div class="desc">出稿前逐項確認</div>
+      </div>
+      <div id="checksContainer"></div>
+    </section>
+
+    <!-- ===== 注意事項 ===== -->
+    <section id="issues-panel" class="panel" style="display:none;">
+      <div class="content-header">
+        <h2>注意事項</h2>
+        <div class="desc">常見問題與解決方案</div>
+      </div>
+      <div id="issuesContainer"></div>
+    </section>
+
+    <!-- ===== 新手教學 ===== -->
+    <section id="tutorial-panel" class="panel" style="display:none;">
+      <div class="content-header">
+        <h2>新手教學</h2>
+        <div class="desc">流程說明與 SOP</div>
+      </div>
+      <div id="tutContainer"></div>
+    </section>
+  </main>
 </div>
 
-<div class="tabs">
-  <button class="tab active" data-panel="blocks" onclick="switchTab('blocks')">區塊範本</button>
-  <button class="tab" data-panel="syntax" onclick="switchTab('syntax')">語法速查</button>
-  <button class="tab" data-panel="notes" onclick="switchTab('notes')">筆記</button>
-  <button class="tab" data-panel="checklist" onclick="switchTab('checklist')">檢查清單</button>
-  <button class="tab" data-panel="tutorial" onclick="switchTab('tutorial')">教學 / 檔案過工</button>
-</div>
-
-<main>
-  <!-- 區塊範本 -->
-  <section class="panel active" data-panel="blocks">
-    <div class="section-head">
-      <h2>區塊範本</h2>
-      <div class="subhead">常用的 HTML Email 模組，可複製或編輯</div>
-    </div>
-    <div class="blocks-grid" id="blocksGrid"></div>
-    <button class="add-btn" onclick="openBlockEditor()">＋ 新增區塊</button>
-  </section>
-
-  <!-- 語法速查 -->
-  <section class="panel" data-panel="syntax">
-    <div class="section-head">
-      <h2>語法速查</h2>
-      <div class="subhead">點擊 CSS 片段可複製到剪貼簿</div>
-    </div>
-    <div id="synContainer"></div>
-    <button class="add-btn" onclick="addSynGroup()">＋ 新增分類</button>
-  </section>
-
-  <!-- 筆記 -->
-  <section class="panel" data-panel="notes">
-    <div class="section-head">
-      <h2>工作筆記</h2>
-      <div class="subhead">記下踩雷、小技巧與心得</div>
-    </div>
-    <div id="notesContainer"></div>
-    <button class="add-btn" onclick="openNoteEditor()">＋ 新增筆記</button>
-  </section>
-
-  <!-- 檢查清單 -->
-  <section class="panel" data-panel="checklist">
-    <div class="section-head">
-      <h2>出稿檢查清單</h2>
-      <div class="subhead">寄出前逐項確認</div>
-    </div>
-    <div id="checkContainer"></div>
-    <button class="add-btn" onclick="addCheckItem()">＋ 新增項目</button>
-  </section>
-
-  <!-- 教學 / 檔案過工 -->
-  <section class="panel" data-panel="tutorial">
-    <div class="section-head">
-      <h2>教學 / 檔案過工</h2>
-      <div class="subhead">流程說明與 SOP</div>
-    </div>
-    <div id="tutContainer"></div>
-    <button class="add-btn" onclick="addTutSection()">＋ 新增章節</button>
-  </section>
-</main>
-
-<!-- GitHub 設定面板 -->
-<div class="overlay gh-panel" id="ghOverlay" onclick="handleGHBg(event)">
-  <div class="modal">
+<!-- GitHub 設定 Modal -->
+<div class="overlay" id="ghOverlay" onclick="if(event.target.id==='ghOverlay') closeGHPanel()">
+  <div class="modal" style="max-width:500px;">
     <div class="modal-head">
-      <h3>⚙️ GitHub 連線設定</h3>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <span>GitHub 連線設定</span>
+      </div>
       <button class="close-x" onclick="closeGHPanel()">×</button>
     </div>
-    <div class="form-group">
-      <label>Personal Access Token（需 repo 權限）</label>
-      <div class="token-row">
-        <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx">
-        <button class="btn sm" id="togglePwBtn" onclick="toggleTokenVis()">顯示</button>
+    <div class="modal-body">
+      <!-- Token -->
+      <div class="form-group">
+        <label>Personal Access Token</label>
+        <div style="display:flex;gap:8px;align-items:center;">
+          <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxx" style="flex:1;">
+          <button class="btn" onclick="toggleTokenVis()" id="tokenVisBtn" style="flex-shrink:0;padding:8px 12px;">顯示</button>
+        </div>
+        <div style="font-size:11px;color:var(--ink-mute);margin-top:6px;line-height:1.6;">
+          在 GitHub → Settings → Developer settings → Personal access tokens 產生，勾選 <code style="background:var(--bg);padding:1px 5px;border-radius:3px;font-size:11px;">repo</code> 權限即可。Token 只存在你自己的瀏覽器裡，不會上傳到任何地方。
+        </div>
       </div>
+      <!-- Owner -->
+      <div class="form-group">
+        <label>GitHub 用戶名稱</label>
+        <input type="text" id="ghOwner" placeholder="TimmyTurtle708">
+      </div>
+      <!-- Repo -->
+      <div class="form-group">
+        <label>Repository 名稱</label>
+        <input type="text" id="ghRepo" placeholder="HTML-Handbook">
+      </div>
+      <!-- 手冊檔名 -->
+      <div class="form-group">
+        <label>手冊檔名（在 Repo 裡的路徑）</label>
+        <input type="text" id="ghFile" placeholder="index.html">
+        <div style="font-size:11px;color:var(--ink-mute);margin-top:4px;">通常是 <code style="background:var(--bg);padding:1px 5px;border-radius:3px;font-size:11px;">index.html</code>，如果你的 Repo 裡叫別的名字就改這裡。</div>
+      </div>
+      <!-- 連線狀態 -->
+      <div id="ghStatusMsg" style="display:none;padding:10px 14px;border-radius:7px;font-size:13px;margin-top:4px;"></div>
     </div>
-    <div class="form-group">
-      <label>使用者名稱</label>
-      <input type="text" id="ghOwner" placeholder="TimmyTurtle708">
-    </div>
-    <div class="form-group">
-      <label>Repository 名稱</label>
-      <input type="text" id="ghRepo" placeholder="HTML-Handbook">
-    </div>
-    <div class="form-group">
-      <label>資料檔名（建議：data.json）</label>
-      <input type="text" id="ghDataFile" placeholder="data.json" value="data.json">
-    </div>
-    <div class="gh-status" id="ghStatus"></div>
-    <div class="form-actions">
-      <button class="btn" onclick="closeGHPanel()">取消</button>
-      <button class="btn primary" onclick="saveGHSettings()">儲存並驗證</button>
+    <div class="modal-footer" style="justify-content:space-between;">
+      <button class="btn" onclick="testGHConnection()" style="color:var(--ink-mute);">🔌 測試連線</button>
+      <div style="display:flex;gap:8px;">
+        <button class="btn" onclick="closeGHPanel()">取消</button>
+        <button class="btn primary" onclick="saveGHSettings()">儲存設定</button>
+      </div>
     </div>
   </div>
 </div>
 
-<!-- 版本歷史面板 -->
-<div class="overlay" id="versionOverlay" onclick="handleVersionBg(event)">
+<!-- 版本歷史 Modal -->
+<div class="overlay" id="versionOverlay" onclick="if(event.target.id==='versionOverlay') closeVersionPanel()">
   <div class="modal">
     <div class="modal-head">
       <h3>🕐 歷史版本</h3>
       <button class="close-x" onclick="closeVersionPanel()">×</button>
     </div>
-    <p style="font-size:13px;color:var(--ink-mute);margin-bottom:14px;">每次同步會自動保留最近 10 個版本。點選可回復。</p>
-    <div id="versionList"></div>
+    <div class="modal-body" id="versionList"></div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeVersionPanel()">關閉</button>
+    </div>
   </div>
 </div>
 
-<!-- 通用編輯器 -->
-<div class="overlay" id="editorOverlay" onclick="handleEditorBg(event)">
-  <div class="modal">
+<!-- 編輯器 Modal -->
+<div class="overlay" id="editorOverlay" onclick="if(event.target.id==='editorOverlay') closeEditor()">
+  <div class="modal" style="max-width:680px;">
     <div class="modal-head">
       <h3 id="editorTitle">編輯</h3>
       <button class="close-x" onclick="closeEditor()">×</button>
     </div>
-    <div id="editorBody"></div>
-    <div class="form-actions">
+    <div class="modal-body" id="editorBody"></div>
+    <div class="modal-footer">
       <button class="btn" onclick="closeEditor()">取消</button>
-      <button class="btn accent" id="editorDeleteBtn" style="display:none;" onclick="editorDelete()">刪除</button>
+      <button class="btn" id="editorDeleteBtn" style="display:none;background:#fde9e2;color:var(--err);border-color:#f5c6be;" onclick="editorDelete()">刪除</button>
       <button class="btn primary" onclick="editorSave()">儲存</button>
     </div>
   </div>
+</div>
+
+<!-- 新增類別 Mini-Modal -->
+<div class="overlay" id="addCatOverlay" onclick="if(event.target.id==='addCatOverlay') closeAddCat()">
+  <div class="mini-modal">
+    <div class="modal-head">
+      <h3>新增類別</h3>
+      <button class="close-x" onclick="closeAddCat()">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label>類別名稱</label>
+        <input type="text" id="newCatInput" placeholder="例：折價券" onkeydown="if(event.key==='Enter') confirmAddCat()">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn" onclick="closeAddCat()">取消</button>
+      <button class="btn primary" onclick="confirmAddCat()">新增</button>
+    </div>
+  </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <img id="lightboxImg" src="" alt="">
 </div>
 
 <div class="toast" id="toast"></div>
 
 <script>
 // ============================================================
-// 資料管理（全部存在 data.json，不碰 HTML）
+// 資料
 // ============================================================
 const DEFAULT_DATA = {
+  blockCats: ['Banner', '按鈕', '文字排版', '圖片', 'RWD', '定價', '信件結構', '裝飾邊框', '間距'],
   blocks: [
-    { id: 'b1', title: 'Header 頭圖', desc: 'Email 最上方的頭圖區塊，通常是主視覺', code: '<table width="600" cellpadding="0" cellspacing="0" border="0">\n  <tr><td align="center">\n    <img src="header.jpg" width="600" style="display:block;">\n  </td></tr>\n</table>' },
-    { id: 'b2', title: 'CTA 按鈕', desc: '號召行動按鈕，使用 table 確保 Outlook 相容', code: '<table cellpadding="0" cellspacing="0" border="0">\n  <tr><td bgcolor="#d94f2b" style="border-radius:6px;">\n    <a href="#" style="display:inline-block;padding:14px 32px;color:#fff;text-decoration:none;font-weight:700;">立即購買</a>\n  </td></tr>\n</table>' },
-    { id: 'b3', title: '雙欄商品區', desc: '左右並列的商品介紹，使用 table 雙欄', code: '<table width="600" cellpadding="0" cellspacing="0" border="0">\n  <tr>\n    <td width="290" valign="top">\n      <img src="p1.jpg" width="290" style="display:block;">\n    </td>\n    <td width="20"></td>\n    <td width="290" valign="top">\n      <img src="p2.jpg" width="290" style="display:block;">\n    </td>\n  </tr>\n</table>' }
+    { id: 'b1', title: 'Email 容器（基本外框）', desc: '最外層 700px table，所有內容的容器。', detail: '', cat: '信件結構', code: '<table width="700" border="0" cellspacing="0" cellpadding="0" style="background-color: #222; padding: 40px 30px;">\n  <tr><td>內容</td></tr>\n</table>', img: '' },
+    { id: 'b2', title: '左右並排（2欄）', desc: '左右兩欄並列，手機版會堆疊。', detail: '', cat: 'RWD', code: '<table width="700" border="0" cellspacing="0" cellpadding="0">\n  <tr>\n    <td width="350" valign="top">左邊</td>\n    <td width="350" valign="top">右邊</td>\n  </tr>\n</table>', img: '' },
+    { id: 'b3', title: '上下堆疊（單欄）', desc: '單欄垂直排列，手機自動置中。', detail: '', cat: 'RWD', code: '<table width="700" border="0" cellspacing="0" cellpadding="0">\n  <tr><td>第一段</td></tr>\n  <tr><td>第二段</td></tr>\n</table>', img: '' }
   ],
   syntax: [
-    {
-      title: '文字樣式',
-      rows: [
-        { label: '粗體', code: 'font-weight: 700;' },
-        { label: '字距', code: 'letter-spacing: 0.05em;' },
-        { label: '底線', code: 'text-decoration: underline;' },
-        { label: '刪除線', code: 'text-decoration: line-through;' },
-        { label: '全大寫', code: 'text-transform: uppercase;' }
-      ]
-    },
-    {
-      title: '間距 & 版型',
-      rows: [
-        { label: '內距上下', code: 'padding: 20px 0;' },
-        { label: '外距置中', code: 'margin: 0 auto;' },
-        { label: '行高', code: 'line-height: 1.6;' },
-        { label: '圓角', code: 'border-radius: 6px;' }
-      ]
-    },
-    {
-      title: 'Email 相容小撇步',
-      rows: [
-        { label: '圖片去縫隙', code: 'display: block;' },
-        { label: 'Outlook 表格清零', code: 'border-collapse: collapse;' },
-        { label: '強制 iOS 不轉連結', code: 'color: inherit; text-decoration: none;' }
-      ]
-    }
+    { label: '文字樣式', items: [
+      { n: '刪除線', c: 'text-decoration: line-through;' },
+      { n: '字母全大寫', c: 'text-transform: uppercase;' },
+      { n: '超連結去底線', c: 'text-decoration: none;' }
+    ]},
+    { label: '對齊 & 排版', items: [
+      { n: '水平置中', c: 'align="center"' },
+      { n: '垂直置中', c: 'vertical-align: middle;' },
+      { n: '行高', c: 'line-height: 1.7;' }
+    ]},
+    { label: '框線 & 裝飾', items: [
+      { n: '虛線邊框', c: 'border-bottom: 1px dashed #c4c4c4;' },
+      { n: '實線邊框', c: 'border: 1px solid #ccc;' },
+      { n: '圓角', c: 'border-radius: 6px;' }
+    ]}
   ],
   notes: [
-    { id: 'n1', title: 'Gmail 圖片封鎖', body: 'Gmail 預設會擋圖片，所以 alt 文字必須有設，視覺也要考慮「圖沒載出來」的情境。' },
-    { id: 'n2', title: 'Outlook 的 padding bug', body: 'Outlook 對 padding 的支援不完全，建議用 table 的 cellpadding 或空的 td 來做間距。' }
+    { id: 'n1', title: '倒數計時注意事項', body: '1. alt 都打上截止日期，以免失效時還能有文字。\n2. 開信數超過 1 萬會失效，可用不同信生不同連結。\n3. Newsletter 擋不適合放，原因是同時使用會讓倒數計時失效。', img: '' },
+    { id: 'n2', title: '索老大大阿科普 fillin 篩選公式', body: '篩掉 @reallusion.com 信箱：\n=IF(ISNUMBER(SEARCH("@reallusion.com",A1)),"",A1)', img: '' },
+    { id: 'n3', title: '跑版暴力解法', body: '兩邊因字數不一樣高，可在 table 加上 width="100%"。\n（但不同電腦看還是有風險）', img: '' }
   ],
-  checklist: [
-    { id: 'c1', text: '所有圖片都有設定 alt 文字', done: false },
-    { id: 'c2', text: '所有連結都已加上追蹤參數', done: false },
-    { id: 'c3', text: '寬度固定為 600px', done: false },
-    { id: 'c4', text: '在 Gmail、Outlook、Apple Mail 都測過', done: false },
-    { id: 'c5', text: '退訂連結正常運作', done: false },
-    { id: 'c6', text: '發件人姓名與 email 正確', done: false }
-  ],
+  checks: {
+    '初次校稿': ['Cannot see 能不能點', '跨月時檢查右上角日期', '搜尋替換清理絕對連結', '檢查所有圖片 display:block'],
+    'RWD 確認': ['最頂部的留白正常', '箭頭換行正常', '灰底正常', '標題沒過大'],
+    '測試信再次Check': ['Gmail 測試正常', 'Outlook 測試正常', 'iPhone 測試正常']
+  },
   tutorial: [
-    {
-      id: 't1', title: '檔案過工流程',
-      items: [
-        { id: 'ti1', title: '1. 接收設計稿', body: '確認設計稿為 600px 寬，切圖前確認文案與連結清單完整。' },
-        { id: 'ti2', title: '2. 切圖', body: '使用 Photoshop 切片，圖片統一存成 JPG（商品圖）或 PNG（Logo），檔名用英文小寫。' },
-        { id: 'ti3', title: '3. 寫 HTML', body: '以 table 為主結構，所有樣式內聯，不使用 div + CSS class。' },
-        { id: 'ti4', title: '4. 測試', body: '用 Litmus 或 Email on Acid 跑多平台測試，重點檢查 Outlook 2013+。' }
-      ]
-    }
+    { title: '🧠 心理建設', items: [
+      { t: '你學的 HTML 在這裡為什麼不能用？', desc: 'Email 的對象是郵件客戶端，不是瀏覽器。Outlook 改用 Word 渲染，CSS 支援停留在非常原始的程度。' },
+      { t: 'Outlook 為什麼這麼難搞？', desc: 'Outlook 2007 後用 Word 當渲染引擎，導致大量 CSS 失效。企業用戶還在用舊版，所以必須為最差的環境設計。' },
+      { t: '「我明明沒改什麼，怎麼就壞了？」', desc: '同樣的 code 在不同地方看起來完全不同。Gmail 網頁版可能正常，但 Outlook 客户端卻跑版。' }
+    ]}
+  ],
+  issues: [
+    { id: 'i1', cat: 'rwd',    t: 'RWD 跑版',         desc: '', detail: '', img: '' },
+    { id: 'i2', cat: 'style',  t: '超連結 & 底線不見', desc: '', detail: '', img: '' },
+    { id: 'i3', cat: 'layout', t: '副標退到橘線後',     desc: '', detail: '', img: '' },
+    { id: 'i4', cat: 'layout', t: '高度無法置頂',       desc: '', detail: '', img: '' },
+    { id: 'i5', cat: 'image',  t: '圖片下方莫名空格',   desc: '', detail: '', img: '' },
+    { id: 'i6', cat: 'misc',   t: '網頁影片筆記',       desc: '', detail: '', img: '' }
   ],
   meta: { version: 1, updatedAt: Date.now() }
 };
 
 let DATA = structuredClone(DEFAULT_DATA);
 let EDIT_MODE = false;
-let EDITOR_CTX = null; // 當前編輯的項目上下文
+let EDITOR_CTX = null;
 let SYNC_DEBOUNCE = null;
-let PENDING_SYNC = false;
+
+const LS_DATA = 'rl_handbook_data_v9';
+const LS_GH = 'rl_handbook_gh_v9';
+const LS_VERSIONS = 'rl_handbook_versions_v9';
 
 // ============================================================
-// LocalStorage（離線副本）
+// LocalStorage
 // ============================================================
-const LS_DATA = 'rl_handbook_data_v7';
-const LS_GH = 'rl_handbook_gh_v7';
-const LS_VERSIONS = 'rl_handbook_versions_v7';
-
 function saveLocal() {
   DATA.meta.updatedAt = Date.now();
   try { localStorage.setItem(LS_DATA, JSON.stringify(DATA)); } catch(e) {}
+  updateTimestamp();
 }
+
 function loadLocal() {
   try {
     const s = localStorage.getItem(LS_DATA);
@@ -771,548 +1397,622 @@ function loadLocal() {
   } catch(e) {}
 }
 
+function updateTimestamp() {
+  const el = document.getElementById('sidebarTimestamp');
+  if (!el) return;
+  const d = new Date(DATA.meta.updatedAt || Date.now());
+  const fmt = d.toLocaleString('zh-TW', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' });
+  el.textContent = `最後更新 ${fmt} · v${DATA.meta.version}`;
+}
+
 // ============================================================
-// GitHub 設定
+// 側邊欄收合
 // ============================================================
-function getGH() {
-  try { return JSON.parse(localStorage.getItem(LS_GH) || '{}'); }
-  catch(e) { return {}; }
-}
-function hasGH() {
-  const g = getGH();
-  return !!(g.token && g.owner && g.repo);
+function toggleSidebar() {
+  const sb = document.getElementById('sidebar');
+  const mc = document.querySelector('.main-container');
+  const collapsed = sb.classList.toggle('collapsed');
+  mc.style.marginLeft = collapsed ? 'var(--sidebar-collapsed-w)' : 'var(--sidebar-w)';
 }
 
-function openGHPanel() {
-  const g = getGH();
-  document.getElementById('ghToken').value = g.token || '';
-  document.getElementById('ghOwner').value = g.owner || '';
-  document.getElementById('ghRepo').value = g.repo || '';
-  document.getElementById('ghDataFile').value = g.dataFile || 'data.json';
-  document.getElementById('ghStatus').className = 'gh-status';
-  document.getElementById('ghStatus').textContent = '';
-  document.getElementById('ghOverlay').classList.add('open');
-}
-function closeGHPanel() {
-  document.getElementById('ghOverlay').classList.remove('open');
-}
-function handleGHBg(e) {
-  if (e.target.id === 'ghOverlay') closeGHPanel();
-}
-function toggleTokenVis() {
-  const inp = document.getElementById('ghToken');
-  const btn = document.getElementById('togglePwBtn');
-  if (inp.type === 'password') { inp.type = 'text'; btn.textContent = '隱藏'; }
-  else { inp.type = 'password'; btn.textContent = '顯示'; }
-}
-
-async function saveGHSettings() {
-  const token = document.getElementById('ghToken').value.trim();
-  const owner = document.getElementById('ghOwner').value.trim();
-  const repo = document.getElementById('ghRepo').value.trim();
-  const dataFile = document.getElementById('ghDataFile').value.trim() || 'data.json';
-  const statusEl = document.getElementById('ghStatus');
-
-  if (!token || !owner || !repo) {
-    statusEl.className = 'gh-status show err';
-    statusEl.textContent = '⚠️ 請填寫所有欄位';
-    return;
-  }
-
-  statusEl.className = 'gh-status show warn';
-  statusEl.textContent = '🔐 驗證中…';
-
-  try {
-    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
-      headers: { 'Authorization': `Bearer ${token}`, 'Accept': 'application/vnd.github.v3+json' }
-    });
-    if (!res.ok) {
-      const errData = await res.json().catch(() => ({}));
-      throw new Error(errData.message || `狀態 ${res.status}`);
-    }
-    const data = await res.json();
-    localStorage.setItem(LS_GH, JSON.stringify({ token, owner, repo, dataFile }));
-    statusEl.className = 'gh-status show ok';
-    statusEl.textContent = `✅ 連線成功 · ${data.full_name}`;
-    updateSyncIndicator('idle');
-    setTimeout(() => closeGHPanel(), 1200);
-  } catch(e) {
-    statusEl.className = 'gh-status show err';
-    statusEl.textContent = `❌ ${e.message}`;
+// ============================================================
+// 面板切換
+// ============================================================
+function switchPanel(name) {
+  document.querySelectorAll('.sidebar-menu button').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.panel === name);
+  });
+  document.querySelectorAll('.panel').forEach(p => {
+    p.style.display = p.id === name + '-panel' ? 'block' : 'none';
+  });
+  document.querySelectorAll('.subtab-bar').forEach(bar => {
+    bar.style.display = bar.id === 'subtabs-' + name ? 'flex' : 'none';
+  });
+  // 切回語法庫時，確保子頁籤回到「區塊語法」
+  if (name === 'syntax') {
+    resetSyntaxSub();
   }
 }
 
-// ============================================================
-// 同步（只同步 data.json，超快超輕）
-// ============================================================
-function updateSyncIndicator(state, text) {
-  const dot = document.getElementById('syncDot');
-  const txt = document.getElementById('syncText');
-  const ind = document.getElementById('syncIndicator');
-  const map = {
-    idle: { cls: 'dot idle', label: '已連線 · 閒置', ind: '就緒' },
-    syncing: { cls: 'dot warn', label: '同步中…', ind: '⬆️ 上傳中…' },
-    ok: { cls: 'dot', label: '已同步', ind: '✅ 已同步' },
-    err: { cls: 'dot err', label: '同步失敗', ind: '❌ 失敗' },
-    offline: { cls: 'dot idle', label: '未連線 GitHub', ind: '離線模式' }
-  };
-  const m = map[state] || map.idle;
-  dot.className = m.cls;
-  txt.textContent = text || m.label;
-  ind.textContent = m.ind;
+function resetSyntaxSub() {
+  ['blocks-area', 'blocks-quick', 'blocks-issues-sub'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = id === 'blocks-area' ? 'block' : 'none';
+  });
+  document.querySelectorAll('#subtabs-syntax .subtab-btn').forEach((b, i) => {
+    b.classList.toggle('active', i === 0);
+  });
+  CURRENT_BLOCKS_SUB = 'blocks-area';
 }
 
-// 從 GitHub 拉取 data.json（頁面載入時用）
-async function pullFromGitHub() {
-  if (!hasGH()) return false;
-  const g = getGH();
-  try {
-    const url = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${g.dataFile}?_=${Date.now()}`;
-    const res = await fetch(url, {
-      headers: { 'Authorization': `Bearer ${g.token}`, 'Accept': 'application/vnd.github.v3+json' },
-      cache: 'no-store'
-    });
-    if (res.status === 404) return false; // 檔案還沒建立
-    if (!res.ok) throw new Error(`狀態 ${res.status}`);
-    const fileData = await res.json();
-    const binary = atob(fileData.content.replace(/\n/g, ''));
-    const bytes = new Uint8Array(binary.length);
-    for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
-    const text = new TextDecoder('utf-8').decode(bytes);
-    const parsed = JSON.parse(text);
-    // 本地版本較新才不覆蓋
-    const localUpdated = DATA.meta?.updatedAt || 0;
-    const remoteUpdated = parsed.meta?.updatedAt || 0;
-    if (remoteUpdated >= localUpdated) {
-      DATA = parsed;
-      saveLocal();
+// Sub-tab 切換（語法庫內部）
+let CURRENT_BLOCKS_SUB = 'blocks-area';
+
+function switchSub(subId, btn) {
+  ['blocks-area', 'blocks-quick', 'blocks-issues-sub'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+  });
+  const target = document.getElementById(subId);
+  if (target) target.style.display = 'block';
+
+  document.querySelectorAll('#subtabs-syntax .subtab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+
+  CURRENT_BLOCKS_SUB = subId;
+  if (subId === 'blocks-quick') renderSyntaxCore('synContainer2');
+  if (subId === 'blocks-issues-sub') renderIssuesCore('issuesContainer2');
+}
+
+// ============================================================
+// 區塊範本
+// ============================================================
+let ACTIVE_CAT = '全部';
+
+function renderFilterBar() {
+  const bar = document.getElementById('filterBar');
+  if (!bar) return;
+  const cats = DATA.blockCats || [];
+  bar.innerHTML = `
+    <span class="filter-label">篩選：</span>
+    <button class="filter-chip ${ACTIVE_CAT === '全部' ? 'active' : ''}" onclick="filterByCat('全部')">全部</button>
+    ${cats.map(c => `
+      <button class="filter-chip ${ACTIVE_CAT === c ? 'active' : ''}" onclick="filterByCat('${escapeAttr(c)}')">${escapeHtml(c)}</button>
+    `).join('')}
+    <button class="filter-chip add-cat" onclick="addCategory()">＋ 新增類別</button>
+  `;
+}
+
+function filterByCat(cat) {
+  ACTIVE_CAT = cat;
+  renderFilterBar();
+  renderBlocks();
+}
+
+// 新增類別 — 開 Modal
+let ADD_CAT_SOURCE = 'bar'; // 'bar' | 'editor'
+
+function addCategory() {
+  ADD_CAT_SOURCE = 'bar';
+  document.getElementById('newCatInput').value = '';
+  document.getElementById('addCatOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('newCatInput').focus(), 50);
+}
+
+function closeAddCat() {
+  document.getElementById('addCatOverlay').classList.remove('open');
+}
+
+function confirmAddCat() {
+  const name = document.getElementById('newCatInput').value.trim();
+  if (!name) { showToast('類別名稱不可為空', 'err'); return; }
+  if (!DATA.blockCats) DATA.blockCats = [];
+  if (DATA.blockCats.includes(name)) { showToast('類別已存在', 'err'); return; }
+  DATA.blockCats.push(name);
+  saveLocal();
+  closeAddCat();
+  if (ADD_CAT_SOURCE === 'editor') {
+    // 更新編輯器內的 select
+    const sel = document.getElementById('f_cat');
+    if (sel) {
+      const opt = document.createElement('option');
+      opt.value = name;
+      opt.textContent = name;
+      opt.selected = true;
+      sel.appendChild(opt);
     }
-    window._lastSha = fileData.sha;
-    return true;
-  } catch(e) {
-    console.warn('[pull] 失敗:', e);
-    return false;
   }
+  renderFilterBar();
+  showToast('✅ 已新增類別：' + name, 'ok');
 }
 
-// 推送 data.json 到 GitHub（防抖 + sha 自動更新 + 單次執行保護）
-function scheduleSync() {
-  if (!hasGH()) return;
-  PENDING_SYNC = true;
-  clearTimeout(SYNC_DEBOUNCE);
-  updateSyncIndicator('syncing', '待同步…');
-  SYNC_DEBOUNCE = setTimeout(() => {
-    doSync();
-  }, 1500); // 1.5 秒內的多次修改會合併成一次推送
+function deleteCategory(cat) {
+  if (!confirm(`確定刪除「${cat}」類別？\n（卡片不會被刪除，類別欄位會變空白）`)) return;
+  DATA.blockCats = (DATA.blockCats || []).filter(c => c !== cat);
+  DATA.blocks.forEach(b => { if (b.cat === cat) b.cat = ''; });
+  if (ACTIVE_CAT === cat) ACTIVE_CAT = '全部';
+  saveLocal();
+  renderFilterBar();
+  renderBlocks();
+  showToast('已刪除類別', 'ok');
 }
 
-let SYNCING = false;
-async function doSync() {
-  if (!hasGH() || SYNCING) return;
-  SYNCING = true;
-  PENDING_SYNC = false;
-  updateSyncIndicator('syncing');
-  const g = getGH();
-  const url = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${g.dataFile}`;
-
-  try {
-    // 1. 先取得最新 sha（每次都重新取得，避免 409 衝突）
-    let sha = '';
-    try {
-      const getRes = await fetch(`${url}?_=${Date.now()}`, {
-        headers: { 'Authorization': `Bearer ${g.token}`, 'Accept': 'application/vnd.github.v3+json' },
-        cache: 'no-store'
-      });
-      if (getRes.ok) {
-        const fd = await getRes.json();
-        sha = fd.sha;
-      }
-    } catch(e) {}
-
-    // 2. 推送
-    DATA.meta.updatedAt = Date.now();
-    DATA.meta.version = (DATA.meta.version || 0) + 1;
-    const jsonStr = JSON.stringify(DATA, null, 2);
-    const bytes = new TextEncoder().encode(jsonStr);
-    let binary = '';
-    bytes.forEach(b => binary += String.fromCharCode(b));
-    const base64 = btoa(binary);
-
-    const putRes = await fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `Bearer ${g.token}`,
-        'Accept': 'application/vnd.github.v3+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: `📝 更新 v${DATA.meta.version} · ${new Date().toLocaleString('zh-TW')}`,
-        content: base64,
-        ...(sha ? { sha } : {})
-      })
-    });
-
-    if (!putRes.ok) {
-      const errData = await putRes.json().catch(() => ({}));
-      throw new Error(errData.message || `狀態 ${putRes.status}`);
-    }
-
-    const result = await putRes.json();
-    window._lastSha = result.content.sha;
-
-    // 3. 存快照到本地歷史
-    saveVersionSnapshot();
-
-    updateSyncIndicator('ok');
-    showToast('✅ 已同步到 GitHub', 'ok');
-    setTimeout(() => updateSyncIndicator('idle'), 2000);
-  } catch(e) {
-    console.error('[sync] 失敗:', e);
-    updateSyncIndicator('err');
-    showToast(`❌ 同步失敗：${e.message}`, 'err');
-    setTimeout(() => updateSyncIndicator('idle'), 3000);
-  } finally {
-    SYNCING = false;
-    // 如果在同步期間又有新變更，再觸發一次
-    if (PENDING_SYNC) scheduleSync();
-  }
-}
-
-// ============================================================
-// 版本歷史
-// ============================================================
-function saveVersionSnapshot() {
-  try {
-    const versions = JSON.parse(localStorage.getItem(LS_VERSIONS) || '[]');
-    versions.unshift({ ts: Date.now(), version: DATA.meta.version, data: DATA });
-    // 只留最近 10 筆
-    if (versions.length > 10) versions.length = 10;
-    localStorage.setItem(LS_VERSIONS, JSON.stringify(versions));
-  } catch(e) {}
-}
-
-function openVersionPanel() {
-  const list = document.getElementById('versionList');
-  try {
-    const versions = JSON.parse(localStorage.getItem(LS_VERSIONS) || '[]');
-    if (versions.length === 0) {
-      list.innerHTML = '<p style="color:var(--ink-mute);text-align:center;padding:20px;">尚無歷史版本</p>';
-    } else {
-      list.innerHTML = versions.map((v, i) => `
-        <div class="note-card" style="margin-bottom:8px;">
-          <div style="display:flex;justify-content:space-between;align-items:center;">
-            <div>
-              <strong>v${v.version}</strong>
-              <span style="color:var(--ink-mute);font-size:12px;margin-left:8px;">${new Date(v.ts).toLocaleString('zh-TW')}</span>
-            </div>
-            <button class="btn sm" onclick="restoreVersion(${i})">回復此版本</button>
-          </div>
-        </div>
-      `).join('');
-    }
-  } catch(e) { list.innerHTML = '<p>讀取失敗</p>'; }
-  document.getElementById('versionOverlay').classList.add('open');
-}
-function closeVersionPanel() { document.getElementById('versionOverlay').classList.remove('open'); }
-function handleVersionBg(e) { if (e.target.id === 'versionOverlay') closeVersionPanel(); }
-
-function restoreVersion(index) {
-  if (!confirm('確定要回復到這個版本嗎？當前變更會被覆蓋。')) return;
-  try {
-    const versions = JSON.parse(localStorage.getItem(LS_VERSIONS) || '[]');
-    DATA = versions[index].data;
-    saveLocal();
-    renderAll();
-    scheduleSync();
-    closeVersionPanel();
-    showToast('✅ 已回復到該版本', 'ok');
-  } catch(e) { showToast('回復失敗', 'err'); }
-}
-
-// ============================================================
-// 匯出
-// ============================================================
-function exportData() {
-  const blob = new Blob([JSON.stringify(DATA, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `handbook-v${DATA.meta.version}-${Date.now()}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  showToast('📥 已匯出 JSON', 'ok');
-}
-
-// ============================================================
-// UI：Toast
-// ============================================================
-let TOAST_TIMER = null;
-function showToast(msg, type) {
-  const el = document.getElementById('toast');
-  el.textContent = msg;
-  el.className = 'toast show' + (type ? ' ' + type : '');
-  clearTimeout(TOAST_TIMER);
-  TOAST_TIMER = setTimeout(() => { el.className = 'toast'; }, 2500);
-}
-
-// ============================================================
-// UI：Tab 切換
-// ============================================================
-function switchTab(name) {
-  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('active', t.dataset.panel === name));
-  document.querySelectorAll('.panel').forEach(p => p.classList.toggle('active', p.dataset.panel === name));
-}
-
-// ============================================================
-// UI：編輯模式
-// ============================================================
-function toggleEditMode() {
-  EDIT_MODE = !EDIT_MODE;
-  document.body.classList.toggle('edit-mode', EDIT_MODE);
-  document.getElementById('editToggleBtn').textContent = EDIT_MODE ? '✅ 完成編輯' : '✏️ 開始編輯';
-  renderAll();
-  if (!EDIT_MODE) showToast('已離開編輯模式', 'ok');
-  else showToast('編輯模式已開啟', 'ok');
-}
-
-// ============================================================
-// Render：區塊
-// ============================================================
 function renderBlocks() {
+  renderFilterBar();
   const grid = document.getElementById('blocksGrid');
-  grid.innerHTML = DATA.blocks.map(b => `
-    <div class="block-card">
-      <h3>${escapeHtml(b.title)}</h3>
-      <div class="desc">${escapeHtml(b.desc)}</div>
-      <pre>${escapeHtml(b.code)}</pre>
-      <div class="card-actions">
-        <button class="btn sm" onclick="copyBlock('${b.id}')">📋 複製</button>
-        ${EDIT_MODE ? `<button class="btn sm" onclick="openBlockEditor('${b.id}')">編輯</button>` : ''}
-        ${EDIT_MODE ? `<button class="btn sm" onclick="deleteBlock('${b.id}')">刪除</button>` : ''}
+  const list = ACTIVE_CAT === '全部'
+    ? DATA.blocks
+    : DATA.blocks.filter(b => (b.cat || '') === ACTIVE_CAT);
+
+  grid.innerHTML = list.map(b => `
+    <div class="card" onclick="openBlockEditor('${b.id}')">
+      <div class="card-img">
+        ${b.img
+          ? `<img src="${escapeHtml(b.img)}" alt="${escapeHtml(b.title)}">`
+          : `<span style="font-size:28px;opacity:.35;">📷</span>`
+        }
+      </div>
+      <div class="card-body">
+        <h3>${escapeHtml(b.title)}</h3>
+        <div class="card-desc">${escapeHtml(b.desc || '（無說明）')}</div>
+        ${b.cat ? `<span class="card-tag">${escapeHtml(b.cat)}</span>` : ''}
       </div>
     </div>
-  `).join('');
+  `).join('') || `<div style="grid-column:1/-1;padding:40px;text-align:center;color:var(--ink-mute);font-size:13px;">此類別尚無區塊</div>`;
 }
-function copyBlock(id) {
-  const b = DATA.blocks.find(x => x.id === id);
-  if (!b) return;
-  navigator.clipboard.writeText(b.code).then(() => showToast('📋 已複製程式碼', 'ok'));
-}
-function deleteBlock(id) {
-  if (!confirm('確定刪除此區塊？')) return;
-  DATA.blocks = DATA.blocks.filter(b => b.id !== id);
-  saveLocal();
-  renderBlocks();
-  scheduleSync();
-}
+
+// 開啟區塊編輯器
 function openBlockEditor(id) {
-  const block = id ? DATA.blocks.find(b => b.id === id) : null;
-  EDITOR_CTX = { type: 'block', id };
-  document.getElementById('editorTitle').textContent = block ? '編輯區塊' : '新增區塊';
-  document.getElementById('editorDeleteBtn').style.display = block ? 'inline-flex' : 'none';
+  const b = id ? DATA.blocks.find(x => x.id === id) : null;
+  EDITOR_CTX = {
+    type: 'block',
+    id: id || null,
+    tempImg: b ? (b.img || '') : '',
+    tempDetailImgs: b ? (b.detailImgs ? [...b.detailImgs] : []) : []
+  };
+
+  // 標題移到 modal-head
+  document.getElementById('editorTitle').innerHTML = b
+    ? `<input id="f_title" value="${escapeAttr(b.title)}" placeholder="區塊標題"
+        style="border:none;background:transparent;font-size:16px;font-weight:700;
+        font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`
+    : `<input id="f_title" placeholder="區塊標題"
+        style="border:none;background:transparent;font-size:16px;font-weight:700;
+        font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`;
+
+  document.getElementById('editorDeleteBtn').style.display = b ? 'inline-flex' : 'none';
+
+  const imgSrc = EDITOR_CTX.tempImg;
+  const cats = DATA.blockCats || [];
+  const currentCat = b ? (b.cat || '') : '';
+  const detailImgs = EDITOR_CTX.tempDetailImgs;
+
   document.getElementById('editorBody').innerHTML = `
-    <div class="form-group"><label>標題</label><input id="f_title" value="${block ? escapeAttr(block.title) : ''}" placeholder="例：Header 頭圖"></div>
-    <div class="form-group"><label>說明</label><input id="f_desc" value="${block ? escapeAttr(block.desc) : ''}" placeholder="簡短描述這個區塊的用途"></div>
-    <div class="form-group"><label>HTML 程式碼</label><textarea id="f_code" rows="10" placeholder="<table>...</table>">${block ? escapeHtml(block.code) : ''}</textarea></div>
+    <!-- 預覽圖片（拿掉 label）-->
+    <div style="margin-bottom:14px;">
+      <div class="editor-img-zone" id="editorImgZone" onclick="triggerImgUpload()">
+        ${imgSrc
+          ? `<img src="${escapeHtml(imgSrc)}" alt="預覽圖" id="editorImgEl">
+             <div class="img-overlay">
+               <button class="img-action-btn" onclick="event.stopPropagation();openLightboxSrc('${escapeAttr(imgSrc)}')">🔍 放大</button>
+               <button class="img-action-btn danger" onclick="event.stopPropagation();removeEditorImg()">🗑 刪除</button>
+               <button class="img-action-btn" onclick="event.stopPropagation();triggerImgUpload()">↑ 換圖</button>
+             </div>`
+          : `<div class="img-placeholder">
+               <span class="icon">📷</span>
+               <span>點擊上傳圖片</span>
+               <span style="font-size:11px;color:var(--ink-mute);">JPG、PNG、GIF、WebP</span>
+             </div>`
+        }
+      </div>
+      <input type="file" id="imgFileInput" accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml" style="display:none;" onchange="handleImgUpload(event)">
+    </div>
+
+    <!-- 簡短說明（寬）+ 類別（窄）對調成：簡短說明在左寬、類別在右窄 -->
+    <div style="display:grid;grid-template-columns:1fr 160px;gap:12px;margin-bottom:14px;">
+      <div>
+        <label class="field-label">簡短說明</label>
+        <input id="f_desc" value="${b ? escapeAttr(b.desc || '') : ''}" placeholder="一句話說明用途"
+          style="width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--ink);">
+      </div>
+      <div>
+        <label class="field-label">類別</label>
+        <div style="display:flex;gap:6px;align-items:center;">
+          <select id="f_cat" style="flex:1;padding:9px 28px 9px 10px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--ink);appearance:auto;">
+            <option value="">— 未分類 —</option>
+            ${cats.map(c => `<option value="${escapeAttr(c)}" ${currentCat === c ? 'selected' : ''}>${escapeHtml(c)}</option>`).join('')}
+          </select>
+          <button class="btn" onclick="addCatFromEditor()" style="padding:7px 10px;font-size:12px;flex-shrink:0;">＋</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 詳細描述 + 附圖按鈕在標題右側 -->
+    <div class="form-group">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <label class="field-label" style="margin:0;">詳細描述</label>
+        <button class="btn" onclick="triggerDetailImgUpload()" style="font-size:11px;padding:4px 10px;color:var(--ink-mute);">📎 附圖</button>
+      </div>
+      <textarea id="f_detail" style="font-family:inherit;font-size:14px;min-height:160px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);resize:vertical;" placeholder="注意事項、使用方式、相容性說明等...">${b ? escapeHtml(b.detail || '') : ''}</textarea>
+      <input type="file" id="detailImgInput" accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml" multiple style="display:none;" onchange="handleDetailImgUpload(event)">
+      <div id="detailImgList" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:8px;"></div>
+    </div>
+
+    <!-- 程式碼：複製按鈕移到 label 右側 -->
+    <div class="form-group">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;">
+        <label class="field-label" style="margin:0;">HTML 程式碼</label>
+        <button class="btn" onclick="copyEditorCode()" style="font-size:11px;padding:4px 10px;color:var(--ink-mute);">📋 複製</button>
+      </div>
+      <div class="code-field-wrap" style="position:relative;">
+        <textarea id="f_code" style="padding-top:12px;" placeholder="<table>...</table>">${b ? escapeHtml(b.code) : ''}</textarea>
+      </div>
+    </div>
   `;
+
+  // 渲染詳細描述附圖
+  renderDetailImgList();
   document.getElementById('editorOverlay').classList.add('open');
 }
 
+function addNewBlock() {
+  openBlockEditor(null);
+}
+
+// 在編輯器內新增類別
+function addCatFromEditor() {
+  ADD_CAT_SOURCE = 'editor';
+  document.getElementById('newCatInput').value = '';
+  document.getElementById('addCatOverlay').classList.add('open');
+  setTimeout(() => document.getElementById('newCatInput').focus(), 50);
+}
+
+// 在編輯器內刪除某類別
+function deleteCatFromEditor(cat) {
+  deleteCategory(cat);
+  const sel = document.getElementById('f_cat');
+  if (sel) sel.value = '';
+}
+
+// 圖片上傳觸發
+function triggerImgUpload() {
+  document.getElementById('imgFileInput').click();
+}
+
+// 圖片上傳處理
+function handleImgUpload(e) {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (evt) => {
+    EDITOR_CTX.tempImg = evt.target.result;
+    // 重新渲染圖片區
+    const zone = document.getElementById('editorImgZone');
+    zone.innerHTML = `
+      <img src="${evt.target.result}" alt="預覽圖" id="editorImgEl">
+      <div class="img-overlay">
+        <button class="img-action-btn" onclick="event.stopPropagation();openLightbox()">🔍 放大檢視</button>
+        <button class="img-action-btn danger" onclick="event.stopPropagation();removeEditorImg()">🗑 刪除圖片</button>
+        <button class="img-action-btn" onclick="event.stopPropagation();triggerImgUpload()">↑ 換圖</button>
+      </div>
+    `;
+    showToast('✅ 圖片已載入', 'ok');
+  };
+  reader.readAsDataURL(file);
+  // reset input so same file can be re-selected
+  e.target.value = '';
+}
+
+// 刪除編輯器內圖片
+function removeEditorImg() {
+  EDITOR_CTX.tempImg = '';
+  const zone = document.getElementById('editorImgZone');
+  zone.innerHTML = `
+    <div class="img-placeholder">
+      <span class="icon">📷</span>
+      <span>點擊上傳圖片</span>
+      <span style="font-size:11px;color:var(--ink-mute);">支援 JPG、PNG、GIF、WebP</span>
+    </div>
+  `;
+}
+
+// 放大檢視（接受 src 參數）
+function openLightboxSrc(src) {
+  document.getElementById('lightboxImg').src = src;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function openLightbox() {
+  const img = document.getElementById('editorImgEl');
+  if (img) openLightboxSrc(img.src);
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+}
+
+// 詳細描述附圖
+function triggerDetailImgUpload() {
+  document.getElementById('detailImgInput').click();
+}
+
+function handleDetailImgUpload(e) {
+  const files = Array.from(e.target.files);
+  if (!files.length) return;
+  let loaded = 0;
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      EDITOR_CTX.tempDetailImgs.push(evt.target.result);
+      loaded++;
+      if (loaded === files.length) {
+        renderDetailImgList();
+        showToast(`✅ 已附加 ${files.length} 張圖片`, 'ok');
+      }
+    };
+    reader.readAsDataURL(file);
+  });
+  e.target.value = '';
+}
+
+function removeDetailImg(idx) {
+  EDITOR_CTX.tempDetailImgs.splice(idx, 1);
+  renderDetailImgList();
+}
+
+function renderDetailImgList() {
+  const container = document.getElementById('detailImgList');
+  if (!container) return;
+  const imgs = EDITOR_CTX.tempDetailImgs || [];
+  if (!imgs.length) { container.innerHTML = ''; return; }
+  container.innerHTML = imgs.map((src, i) => `
+    <div class="detail-thumb-wrap">
+      <img class="detail-thumb" src="${escapeHtml(src)}" alt="附圖${i+1}"
+        onclick="openLightboxSrc('${escapeAttr(src)}')">
+      <button class="detail-thumb-del" onclick="removeDetailImg(${i})" title="刪除">×</button>
+    </div>
+  `).join('');
+}
+
+// 複製編輯器內的程式碼
+function copyEditorCode() {
+  const ta = document.getElementById('f_code');
+  if (!ta) return;
+  navigator.clipboard.writeText(ta.value).then(() => showToast('✅ 已複製程式碼', 'ok'));
+}
+
 // ============================================================
-// Render：語法速查
+// 語法速查
 // ============================================================
-function renderSyntax() {
-  const c = document.getElementById('synContainer');
+function renderSyntaxCore(containerId) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
   c.innerHTML = DATA.syntax.map((g, gi) => `
-    <div class="syn-group">
-      <h3>${escapeHtml(g.title)}${EDIT_MODE ? `<button class="btn sm ghost" onclick="deleteSynGroup(${gi})" style="margin-left:8px;">✕</button>` : ''}</h3>
+    <div class="syn-section">
+      <h3>${escapeHtml(g.label)}</h3>
       <div class="syn-rows">
-        ${g.rows.map((r, ri) => `
+        ${g.items.map((r, ri) => `
           <div class="syn-row">
-            <span class="label">${escapeHtml(r.label)}</span>
-            <code onclick="copySyn('${escapeAttr(r.code)}')">${escapeHtml(r.code)}</code>
-            ${EDIT_MODE ? `<button class="btn sm ghost" onclick="deleteSynRow(${gi},${ri})">✕</button>` : '<span></span>'}
+            <span style="font-size:13px;color:var(--ink-soft);">${escapeHtml(r.n)}</span>
+            <code onclick="copySyn('${escapeAttr(r.c)}')">${escapeHtml(r.c)}</code>
+            ${EDIT_MODE ? `<button class="btn" onclick="deleteSynItem(${gi},${ri})" style="font-size:12px;padding:4px 8px;">✕</button>` : '<span></span>'}
           </div>
         `).join('')}
-        ${EDIT_MODE ? `<button class="btn sm ghost" onclick="addSynRow(${gi})" style="align-self:flex-start;">＋ 新增列</button>` : ''}
       </div>
     </div>
   `).join('');
 }
+
+function renderSyntax() { renderSyntaxCore('synContainer'); }
+
 function copySyn(code) {
-  navigator.clipboard.writeText(code).then(() => showToast('📋 已複製：' + code, 'ok'));
+  navigator.clipboard.writeText(code).then(() => showToast('✅ 已複製：' + code, 'ok'));
 }
-function addSynGroup() {
+
+function addNewSynGroup() {
   const title = prompt('新分類名稱？');
   if (!title) return;
-  DATA.syntax.push({ title, rows: [] });
+  DATA.syntax.push({ label: title, items: [] });
   saveLocal(); renderSyntax(); scheduleSync();
 }
-function deleteSynGroup(gi) {
-  if (!confirm('刪除整個分類？')) return;
-  DATA.syntax.splice(gi, 1);
-  saveLocal(); renderSyntax(); scheduleSync();
-}
-function addSynRow(gi) {
-  const label = prompt('說明標籤？');
-  if (!label) return;
-  const code = prompt('CSS 片段？');
-  if (!code) return;
-  DATA.syntax[gi].rows.push({ label, code });
-  saveLocal(); renderSyntax(); scheduleSync();
-}
-function deleteSynRow(gi, ri) {
-  DATA.syntax[gi].rows.splice(ri, 1);
+
+function deleteSynItem(gi, ri) {
+  DATA.syntax[gi].items.splice(ri, 1);
   saveLocal(); renderSyntax(); scheduleSync();
 }
 
 // ============================================================
-// Render：筆記
+// 工作筆記
 // ============================================================
 function renderNotes() {
-  const c = document.getElementById('notesContainer');
-  c.innerHTML = DATA.notes.map(n => `
+  const grid = document.getElementById('notesGrid');
+  grid.innerHTML = DATA.notes.map(n => `
     <div class="note-card">
+      ${n.img ? `<div class="note-img"><img src="${n.img}" alt=""></div>` : `<div class="note-img" onclick="uploadImg('n','${n.id}')">📸 點擊上傳圖片</div>`}
       <h3>${escapeHtml(n.title)}</h3>
       <div class="note-body">${escapeHtml(n.body)}</div>
-      ${n.img ? `<img src="${escapeAttr(n.img)}" alt="">` : ''}
-      ${EDIT_MODE ? `<div class="card-actions" style="opacity:1;margin-top:10px;">
-        <button class="btn sm" onclick="openNoteEditor('${n.id}')">編輯</button>
-        <button class="btn sm" onclick="deleteNote('${n.id}')">刪除</button>
-      </div>` : ''}
+      ${EDIT_MODE ? `
+        <div style="display:flex;gap:6px;margin-top:12px;">
+          <button class="btn" onclick="editNote('${n.id}')" style="font-size:12px;padding:5px 10px;">編輯</button>
+          <button class="btn" onclick="deleteNote('${n.id}')" style="font-size:12px;padding:5px 10px;color:var(--err);">刪除</button>
+        </div>` : ''}
     </div>
-  `).join('') || '<p style="color:var(--ink-mute);text-align:center;padding:20px;">尚無筆記</p>';
+  `).join('');
 }
-function openNoteEditor(id) {
-  const note = id ? DATA.notes.find(n => n.id === id) : null;
+
+function editNote(id) {
+  const n = DATA.notes.find(x => x.id === id);
   EDITOR_CTX = { type: 'note', id };
-  document.getElementById('editorTitle').textContent = note ? '編輯筆記' : '新增筆記';
-  document.getElementById('editorDeleteBtn').style.display = note ? 'inline-flex' : 'none';
+  document.getElementById('editorTitle').textContent = '編輯筆記';
+  document.getElementById('editorDeleteBtn').style.display = 'inline-flex';
   document.getElementById('editorBody').innerHTML = `
-    <div class="form-group"><label>標題</label><input id="f_title" value="${note ? escapeAttr(note.title) : ''}"></div>
-    <div class="form-group"><label>內容</label><textarea id="f_body" rows="6" style="font-family:inherit;">${note ? escapeHtml(note.body) : ''}</textarea></div>
+    <div class="form-group"><label>標題</label><input id="f_title" value="${escapeAttr(n.title)}"></div>
+    <div class="form-group"><label>內容</label><textarea id="f_body">${escapeHtml(n.body)}</textarea></div>
   `;
   document.getElementById('editorOverlay').classList.add('open');
 }
+
+function addNewNote() {
+  EDITOR_CTX = { type: 'note', id: null };
+  document.getElementById('editorTitle').textContent = '新增筆記';
+  document.getElementById('editorDeleteBtn').style.display = 'none';
+  document.getElementById('editorBody').innerHTML = `
+    <div class="form-group"><label>標題</label><input id="f_title" placeholder="標題"></div>
+    <div class="form-group"><label>內容</label><textarea id="f_body" placeholder="內容"></textarea></div>
+  `;
+  document.getElementById('editorOverlay').classList.add('open');
+}
+
 function deleteNote(id) {
-  if (!confirm('刪除此筆記？')) return;
+  if (!confirm('確定刪除？')) return;
   DATA.notes = DATA.notes.filter(n => n.id !== id);
   saveLocal(); renderNotes(); scheduleSync();
 }
 
 // ============================================================
-// Render：檢查清單
+// 檢查清單
 // ============================================================
-function renderCheck() {
-  const c = document.getElementById('checkContainer');
-  c.innerHTML = DATA.checklist.map(item => `
-    <div class="check-item ${item.done ? 'done' : ''}">
-      <input type="checkbox" ${item.done ? 'checked' : ''} onchange="toggleCheck('${item.id}')">
-      <div class="check-text">${escapeHtml(item.text)}</div>
-      ${EDIT_MODE ? `<div class="check-actions">
-        <button class="btn sm ghost" onclick="editCheckItem('${item.id}')">編輯</button>
-        <button class="btn sm ghost" onclick="deleteCheck('${item.id}')">刪除</button>
-      </div>` : ''}
-    </div>
-  `).join('');
-}
-function toggleCheck(id) {
-  const item = DATA.checklist.find(c => c.id === id);
-  if (item) { item.done = !item.done; saveLocal(); renderCheck(); scheduleSync(); }
-}
-function addCheckItem() {
-  const text = prompt('新增檢查項目：');
-  if (!text) return;
-  DATA.checklist.push({ id: 'c' + Date.now(), text, done: false });
-  saveLocal(); renderCheck(); scheduleSync();
-}
-function editCheckItem(id) {
-  const item = DATA.checklist.find(c => c.id === id);
-  if (!item) return;
-  const text = prompt('修改項目文字：', item.text);
-  if (text === null) return;
-  item.text = text;
-  saveLocal(); renderCheck(); scheduleSync();
-}
-function deleteCheck(id) {
-  if (!confirm('刪除此項目？')) return;
-  DATA.checklist = DATA.checklist.filter(c => c.id !== id);
-  saveLocal(); renderCheck(); scheduleSync();
-}
-
-// ============================================================
-// Render：教學
-// ============================================================
-function renderTut() {
-  const c = document.getElementById('tutContainer');
-  c.innerHTML = DATA.tutorial.map((s, si) => `
-    <div class="tut-section">
-      <h3>${escapeHtml(s.title)}${EDIT_MODE ? `<button class="btn sm ghost" onclick="deleteTutSection('${s.id}')" style="margin-left:8px;">✕</button>` : ''}</h3>
-      ${s.items.map(it => `
-        <div class="tut-item">
-          <h4>${escapeHtml(it.title)}</h4>
-          <div class="tut-body">${escapeHtml(it.body)}</div>
-          ${EDIT_MODE ? `<div class="card-actions" style="opacity:1;margin-top:8px;">
-            <button class="btn sm" onclick="editTutItem('${s.id}','${it.id}')">編輯</button>
-            <button class="btn sm" onclick="deleteTutItem('${s.id}','${it.id}')">刪除</button>
-          </div>` : ''}
+function renderChecks() {
+  const c = document.getElementById('checksContainer');
+  c.innerHTML = Object.entries(DATA.checks).map(([title, items]) => `
+    <div class="check-section">
+      <h3>${escapeHtml(title)}</h3>
+      ${items.map(item => `
+        <div class="check-item">
+          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
+          <span>${escapeHtml(item)}</span>
         </div>
       `).join('')}
-      ${EDIT_MODE ? `<button class="btn sm ghost" onclick="addTutItem('${s.id}')" style="margin-top:8px;">＋ 新增步驟</button>` : ''}
     </div>
   `).join('');
 }
-function addTutSection() {
-  const title = prompt('新章節標題？');
-  if (!title) return;
-  DATA.tutorial.push({ id: 't' + Date.now(), title, items: [] });
-  saveLocal(); renderTut(); scheduleSync();
-}
-function deleteTutSection(id) {
-  if (!confirm('刪除整個章節？')) return;
-  DATA.tutorial = DATA.tutorial.filter(s => s.id !== id);
-  saveLocal(); renderTut(); scheduleSync();
-}
-function addTutItem(sid) {
-  const title = prompt('步驟標題？');
-  if (!title) return;
-  const body = prompt('步驟內容？');
-  if (body === null) return;
-  const s = DATA.tutorial.find(x => x.id === sid);
-  if (s) { s.items.push({ id: 'ti' + Date.now(), title, body }); saveLocal(); renderTut(); scheduleSync(); }
-}
-function editTutItem(sid, iid) {
-  const s = DATA.tutorial.find(x => x.id === sid);
-  const it = s?.items.find(x => x.id === iid);
-  if (!it) return;
-  const title = prompt('標題：', it.title);
-  if (title === null) return;
-  const body = prompt('內容：', it.body);
-  if (body === null) return;
-  it.title = title; it.body = body;
-  saveLocal(); renderTut(); scheduleSync();
-}
-function deleteTutItem(sid, iid) {
-  if (!confirm('刪除此步驟？')) return;
-  const s = DATA.tutorial.find(x => x.id === sid);
-  if (s) { s.items = s.items.filter(i => i.id !== iid); saveLocal(); renderTut(); scheduleSync(); }
+
+// ============================================================
+// 教學
+// ============================================================
+function renderTutorial() {
+  const c = document.getElementById('tutContainer');
+  c.innerHTML = DATA.tutorial.map(s => `
+    <div class="tutorial-section">
+      <div class="tutorial-title-badge">${escapeHtml(s.title)}</div>
+      ${s.items.map(it => `
+        <div class="tutorial-item">
+          <h4>${escapeHtml(it.t)}</h4>
+          <p>${escapeHtml(it.desc)}</p>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
 }
 
 // ============================================================
-// 通用編輯器儲存/刪除
+// 問題紀錄（卡片排版，同區塊語法）
+// ============================================================
+function renderIssuesCore(containerId) {
+  const c = document.getElementById(containerId);
+  if (!c) return;
+  if (!DATA.issues || !DATA.issues.length) {
+    c.innerHTML = `<div style="padding:40px;text-align:center;color:var(--ink-mute);font-size:13px;">尚無問題紀錄</div>`;
+    return;
+  }
+  c.innerHTML = `
+    <div class="cards-grid">
+      ${DATA.issues.map(issue => `
+        <div class="card" onclick="openIssueEditor('${issue.id}')">
+          <div class="card-img">
+            ${issue.img
+              ? `<img src="${escapeHtml(issue.img)}" alt="${escapeHtml(issue.t)}">`
+              : `<span style="font-size:28px;opacity:.35;">📷</span>`
+            }
+          </div>
+          <div class="card-body">
+            <h3>${escapeHtml(issue.t)}</h3>
+            <div class="card-desc">${escapeHtml(issue.desc || '（無說明）')}</div>
+            ${issue.cat ? `<span class="card-tag">${escapeHtml(issue.cat)}</span>` : ''}
+          </div>
+        </div>
+      `).join('')}
+    </div>
+    <button class="add-block-btn" onclick="openIssueEditor(null)" style="margin-top:4px;">＋ 新增問題紀錄</button>
+  `;
+}
+
+function renderIssues() { renderIssuesCore('issuesContainer'); }
+
+function openIssueEditor(id) {
+  const issue = id ? DATA.issues.find(x => String(x.id) === String(id)) : null;
+  EDITOR_CTX = { type: 'issue', id: issue ? issue.id : null, tempImg: issue ? (issue.img || '') : '' };
+
+  document.getElementById('editorTitle').innerHTML = issue
+    ? `<input id="f_title" value="${escapeAttr(issue.t)}" placeholder="問題標題"
+        style="border:none;background:transparent;font-size:16px;font-weight:700;
+        font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`
+    : `<input id="f_title" placeholder="問題標題"
+        style="border:none;background:transparent;font-size:16px;font-weight:700;
+        font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`;
+
+  document.getElementById('editorDeleteBtn').style.display = issue ? 'inline-flex' : 'none';
+  const imgSrc = EDITOR_CTX.tempImg;
+
+  document.getElementById('editorBody').innerHTML = `
+    <div class="form-group">
+      <label>預覽圖片</label>
+      <div class="editor-img-zone" id="editorImgZone" onclick="triggerImgUpload()">
+        ${imgSrc
+          ? `<img src="${escapeHtml(imgSrc)}" alt="預覽圖" id="editorImgEl">
+             <div class="img-overlay">
+               <button class="img-action-btn" onclick="event.stopPropagation();openLightboxSrc('${escapeAttr(imgSrc)}')">🔍 放大</button>
+               <button class="img-action-btn danger" onclick="event.stopPropagation();removeEditorImg()">🗑 刪除</button>
+               <button class="img-action-btn" onclick="event.stopPropagation();triggerImgUpload()">↑ 換圖</button>
+             </div>`
+          : `<div class="img-placeholder">
+               <span class="icon">📷</span><span>點擊上傳圖片</span>
+               <span style="font-size:11px;color:var(--ink-mute);">JPG、PNG、GIF、WebP</span>
+             </div>`
+        }
+      </div>
+      <input type="file" id="imgFileInput" accept="image/jpeg,image/png,image/gif,image/webp" style="display:none;" onchange="handleImgUpload(event)">
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;">
+      <div>
+        <label class="field-label">分類</label>
+        <input id="f_cat" value="${issue ? escapeAttr(issue.cat || '') : ''}" placeholder="例：RWD、Outlook…"
+          style="width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--ink);">
+      </div>
+      <div>
+        <label class="field-label">簡短說明</label>
+        <input id="f_desc" value="${issue ? escapeAttr(issue.desc || '') : ''}" placeholder="一句話說明問題"
+          style="width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:7px;font-size:13px;font-family:inherit;background:var(--bg);color:var(--ink);">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="field-label">詳細描述</label>
+      <textarea id="f_detail" style="font-family:inherit;font-size:14px;min-height:100px;width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:7px;background:var(--bg);color:var(--ink);resize:vertical;" placeholder="問題描述、重現步驟、解法...">${issue ? escapeHtml(issue.detail || '') : ''}</textarea>
+    </div>
+  `;
+  document.getElementById('editorOverlay').classList.add('open');
+}
+
+// ============================================================
+// 編輯器通用
 // ============================================================
 function editorSave() {
   if (!EDITOR_CTX) return;
   if (EDITOR_CTX.type === 'block') {
-    const title = document.getElementById('f_title').value.trim();
-    const desc = document.getElementById('f_desc').value.trim();
-    const code = document.getElementById('f_code').value;
-    if (!title) { showToast('標題不可為空', 'err'); return; }
+    const titleEl = document.getElementById('f_title');
+    const title = titleEl ? titleEl.value.trim() : '';
+    const desc = document.getElementById('f_desc') ? document.getElementById('f_desc').value.trim() : '';
+    const detail = document.getElementById('f_detail') ? document.getElementById('f_detail').value : '';
+    const code = document.getElementById('f_code') ? document.getElementById('f_code').value : '';
+    const cat = document.getElementById('f_cat') ? document.getElementById('f_cat').value : '';
+    if (!title) { showToast('標題不可為空', 'err'); titleEl && titleEl.focus(); return; }
+    const img = EDITOR_CTX.tempImg || '';
+    const detailImgs = EDITOR_CTX.tempDetailImgs || [];
     if (EDITOR_CTX.id) {
       const b = DATA.blocks.find(x => x.id === EDITOR_CTX.id);
-      if (b) { b.title = title; b.desc = desc; b.code = code; }
+      if (b) { b.title = title; b.desc = desc; b.detail = detail; b.cat = cat; b.code = code; b.img = img; b.detailImgs = detailImgs; }
     } else {
-      DATA.blocks.push({ id: 'b' + Date.now(), title, desc, code });
+      DATA.blocks.push({ id: 'b' + Date.now(), title, desc, detail, cat, code, img, detailImgs });
     }
     saveLocal(); renderBlocks();
   } else if (EDITOR_CTX.type === 'note') {
@@ -1323,14 +2023,30 @@ function editorSave() {
       const n = DATA.notes.find(x => x.id === EDITOR_CTX.id);
       if (n) { n.title = title; n.body = body; }
     } else {
-      DATA.notes.push({ id: 'n' + Date.now(), title, body });
+      DATA.notes.push({ id: 'n' + Date.now(), title, body, img: '' });
     }
     saveLocal(); renderNotes();
+  } else if (EDITOR_CTX.type === 'issue') {
+    const titleEl = document.getElementById('f_title');
+    const title = titleEl ? titleEl.value.trim() : '';
+    const cat = document.getElementById('f_cat') ? document.getElementById('f_cat').value.trim() : '';
+    const desc = document.getElementById('f_desc') ? document.getElementById('f_desc').value.trim() : '';
+    const detail = document.getElementById('f_detail') ? document.getElementById('f_detail').value : '';
+    if (!title) { showToast('標題不可為空', 'err'); titleEl && titleEl.focus(); return; }
+    const img = EDITOR_CTX.tempImg || '';
+    if (EDITOR_CTX.id) {
+      const issue = DATA.issues.find(x => String(x.id) === String(EDITOR_CTX.id));
+      if (issue) { issue.t = title; issue.cat = cat; issue.desc = desc; issue.detail = detail; issue.img = img; }
+    } else {
+      DATA.issues.push({ id: 'i' + Date.now(), t: title, cat, desc, detail, img });
+    }
+    saveLocal(); renderIssues(); renderIssuesCore('issuesContainer2');
   }
   scheduleSync();
   closeEditor();
   showToast('✅ 已儲存', 'ok');
 }
+
 function editorDelete() {
   if (!EDITOR_CTX?.id) return;
   if (!confirm('確定刪除？')) return;
@@ -1340,69 +2056,294 @@ function editorDelete() {
   } else if (EDITOR_CTX.type === 'note') {
     DATA.notes = DATA.notes.filter(n => n.id !== EDITOR_CTX.id);
     saveLocal(); renderNotes();
+  } else if (EDITOR_CTX.type === 'issue') {
+    DATA.issues = DATA.issues.filter(x => String(x.id) !== String(EDITOR_CTX.id));
+    saveLocal(); renderIssues(); renderIssuesCore('issuesContainer2');
   }
   scheduleSync();
   closeEditor();
-  showToast('🗑️ 已刪除', 'ok');
+  showToast('已刪除', 'ok');
 }
+
 function closeEditor() {
   document.getElementById('editorOverlay').classList.remove('open');
   EDITOR_CTX = null;
 }
-function handleEditorBg(e) { if (e.target.id === 'editorOverlay') closeEditor(); }
+
+// ============================================================
+// 圖片上傳
+// ============================================================
+function uploadImg(type, id) {
+  const input = document.createElement('input');
+  input.type = 'file';
+  input.accept = 'image/*';
+  input.onchange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = (evt) => {
+      const base64 = evt.target.result;
+      if (type === 'b') {
+        const b = DATA.blocks.find(x => x.id === id);
+        if (b) b.img = base64;
+        saveLocal(); renderBlocks();
+      } else {
+        const n = DATA.notes.find(x => x.id === id);
+        if (n) n.img = base64;
+        saveLocal(); renderNotes();
+      }
+      scheduleSync();
+      showToast('✅ 圖片已上傳', 'ok');
+    };
+    reader.readAsDataURL(file);
+  };
+  input.click();
+}
+
+// ============================================================
+// GitHub Contents API
+// ============================================================
+function getGH() {
+  try { return JSON.parse(localStorage.getItem(LS_GH) || '{}'); } catch(e) { return {}; }
+}
+
+function openGHPanel() {
+  const g = getGH();
+  document.getElementById('ghToken').value = g.token || '';
+  document.getElementById('ghOwner').value = g.owner || '';
+  document.getElementById('ghRepo').value = g.repo || '';
+  document.getElementById('ghFile').value = g.dataFile || 'data.json';
+  document.getElementById('ghStatusMsg').style.display = 'none';
+  document.getElementById('ghOverlay').classList.add('open');
+}
+
+function closeGHPanel() {
+  document.getElementById('ghOverlay').classList.remove('open');
+}
+
+function toggleTokenVis() {
+  const input = document.getElementById('ghToken');
+  const btn = document.getElementById('tokenVisBtn');
+  if (input.type === 'password') {
+    input.type = 'text';
+    btn.textContent = '隱藏';
+  } else {
+    input.type = 'password';
+    btn.textContent = '顯示';
+  }
+}
+
+function saveGHSettings() {
+  const token = document.getElementById('ghToken').value.trim();
+  const owner = document.getElementById('ghOwner').value.trim();
+  const repo = document.getElementById('ghRepo').value.trim();
+  const dataFile = document.getElementById('ghFile').value.trim() || 'data.json';
+  if (!token || !owner || !repo) { showToast('請填寫所有欄位', 'err'); return; }
+  localStorage.setItem(LS_GH, JSON.stringify({ token, owner, repo, dataFile }));
+  closeGHPanel();
+  showToast('✅ 設定已儲存', 'ok');
+  updateGHButtons();
+}
+
+function updateGHButtons() {
+  const g = getGH();
+  const hasConfig = !!(g.token && g.owner && g.repo);
+  document.getElementById('btnPull').style.display = hasConfig ? 'inline-flex' : 'none';
+  document.getElementById('btnPush').style.display = hasConfig ? 'inline-flex' : 'none';
+  const pill = document.getElementById('statusPill');
+  if (hasConfig) {
+    pill.innerHTML = '<div class="status-dot"></div> 已連線';
+  } else {
+    pill.innerHTML = '<div class="status-dot" style="background:var(--ink-mute)"></div> 就緒';
+  }
+}
+
+// 取得檔案的目前 SHA（push 時需要）
+async function getFileSHA(g) {
+  const url = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${g.dataFile}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `token ${g.token}`, Accept: 'application/vnd.github+json' }
+  });
+  if (res.status === 404) return null; // 檔案不存在，第一次建立
+  if (!res.ok) throw new Error(`無法取得檔案資訊（${res.status}）`);
+  const data = await res.json();
+  return data.sha;
+}
+
+// 推送 data.json 到 GitHub
+async function ghPush() {
+  const g = getGH();
+  if (!g.token) { showToast('請先設定 GitHub Token', 'err'); return; }
+  setPillState('syncing');
+  try {
+    const sha = await getFileSHA(g);
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify(DATA, null, 2))));
+    const body = {
+      message: `📦 Update ${g.dataFile} — ${new Date().toLocaleString('zh-TW')}`,
+      content,
+      ...(sha ? { sha } : {})
+    };
+    const url = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${g.dataFile}`;
+    const res = await fetch(url, {
+      method: 'PUT',
+      headers: {
+        Authorization: `token ${g.token}`,
+        Accept: 'application/vnd.github+json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    });
+    if (!res.ok) {
+      const err = await res.json();
+      throw new Error(err.message || `HTTP ${res.status}`);
+    }
+    setPillState('ok');
+    showToast('✅ 已推送到 GitHub', 'ok');
+  } catch(e) {
+    setPillState('err');
+    showToast('❌ 推送失敗：' + e.message, 'err');
+    console.error('ghPush error', e);
+  }
+}
+
+// 從 GitHub 拉取 data.json
+async function ghPull() {
+  const g = getGH();
+  if (!g.token) { showToast('請先設定 GitHub Token', 'err'); return; }
+  if (!confirm('確定要從 GitHub 拉取？這會覆蓋目前本機的所有資料。')) return;
+  setPillState('syncing');
+  try {
+    const url = `https://api.github.com/repos/${g.owner}/${g.repo}/contents/${g.dataFile}`;
+    const res = await fetch(url, {
+      headers: { Authorization: `token ${g.token}`, Accept: 'application/vnd.github+json' }
+    });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const file = await res.json();
+    const decoded = decodeURIComponent(escape(atob(file.content.replace(/\n/g,''))));
+    DATA = JSON.parse(decoded);
+    saveLocal();
+    renderAll();
+    updateTimestamp();
+    setPillState('ok');
+    showToast('✅ 已從 GitHub 拉取最新資料', 'ok');
+  } catch(e) {
+    setPillState('err');
+    showToast('❌ 拉取失敗：' + e.message, 'err');
+    console.error('ghPull error', e);
+  }
+}
+
+// 測試連線
+async function testGHConnection() {
+  const token = document.getElementById('ghToken').value.trim();
+  const owner = document.getElementById('ghOwner').value.trim();
+  const repo = document.getElementById('ghRepo').value.trim();
+  const msgEl = document.getElementById('ghStatusMsg');
+  if (!token || !owner || !repo) {
+    msgEl.style.display = 'block';
+    msgEl.style.background = '#fde9e2';
+    msgEl.style.color = 'var(--err)';
+    msgEl.textContent = '請填寫 Token、用戶名稱、Repository 名稱';
+    return;
+  }
+  msgEl.style.display = 'block';
+  msgEl.style.background = '#f5f2ed';
+  msgEl.style.color = '#999';
+  msgEl.textContent = '🔄 測試中...';
+  try {
+    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}`, {
+      headers: { Authorization: `token ${token}`, Accept: 'application/vnd.github+json' }
+    });
+    if (res.ok) {
+      const data = await res.json();
+      msgEl.style.background = '#f0faf5';
+      msgEl.style.color = 'var(--ok)';
+      msgEl.textContent = `✅ 連線成功！Repo: ${data.full_name}`;
+    } else if (res.status === 401) {
+      msgEl.style.background = '#fde9e2';
+      msgEl.style.color = 'var(--err)';
+      msgEl.textContent = '❌ Token 無效或已過期';
+    } else if (res.status === 404) {
+      msgEl.style.background = '#fde9e2';
+      msgEl.style.color = 'var(--err)';
+      msgEl.textContent = '❌ Repository 不存在，請確認名稱';
+    } else {
+      msgEl.style.background = '#fde9e2';
+      msgEl.style.color = 'var(--err)';
+      msgEl.textContent = `❌ 連線失敗（${res.status}）`;
+    }
+  } catch(e) {
+    msgEl.style.background = '#fde9e2';
+    msgEl.style.color = 'var(--err)';
+    msgEl.textContent = '❌ 網路錯誤，請確認網路連線';
+  }
+}
+
+function setPillState(state) {
+  const pill = document.getElementById('statusPill');
+  if (state === 'syncing') {
+    pill.innerHTML = '<div class="status-dot" style="background:var(--warn)"></div> 同步中...';
+  } else if (state === 'ok') {
+    pill.innerHTML = '<div class="status-dot"></div> 已同步';
+    setTimeout(() => {
+      const g = getGH();
+      pill.innerHTML = g.token
+        ? '<div class="status-dot"></div> 已連線'
+        : '<div class="status-dot" style="background:var(--ink-mute)"></div> 就緒';
+    }, 3000);
+  } else if (state === 'err') {
+    pill.innerHTML = '<div class="status-dot" style="background:var(--err)"></div> 同步失敗';
+  }
+}
+
+// 自動 debounce 推送（每次儲存後 2 秒觸發）
+function scheduleSync() {
+  clearTimeout(SYNC_DEBOUNCE);
+  SYNC_DEBOUNCE = setTimeout(() => {
+    const g = getGH();
+    if (g.token && g.owner && g.repo) ghPush();
+  }, 2000);
+}
+
+function closeVersionPanel() {
+  document.getElementById('versionOverlay').classList.remove('open');
+}
 
 // ============================================================
 // Utilities
 // ============================================================
 function escapeHtml(str) {
-  if (str == null) return '';
-  return String(str).replace(/[&<>"']/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;' }[c]));
-}
-function escapeAttr(str) {
-  return escapeHtml(str);
+  if (!str) return '';
+  return String(str).replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 }
 
-// ============================================================
-// Render 全部
-// ============================================================
+function escapeAttr(str) { return escapeHtml(str); }
+
+function showToast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = 'toast show' + (type ? ' ' + type : '');
+  clearTimeout(el._t);
+  el._t = setTimeout(() => { el.className = 'toast'; }, 2500);
+}
+
 function renderAll() {
   renderBlocks();
   renderSyntax();
   renderNotes();
-  renderCheck();
-  renderTut();
-  updateMeta();
-}
-function updateMeta() {
-  const t = document.getElementById('updateTime');
-  const d = new Date(DATA.meta.updatedAt);
-  t.textContent = `最後更新 ${d.toLocaleString('zh-TW')} · v${DATA.meta.version}`;
+  renderChecks();
+  renderTutorial();
+  renderIssues();
 }
 
 // ============================================================
-// 啟動
+// 初始化
 // ============================================================
-async function init() {
-  loadLocal();
-  renderAll();
-
-  if (hasGH()) {
-    updateSyncIndicator('syncing', '拉取最新資料…');
-    const ok = await pullFromGitHub();
-    if (ok) {
-      renderAll();
-      updateSyncIndicator('idle');
-      showToast('✅ 已載入最新資料', 'ok');
-    } else {
-      updateSyncIndicator('idle');
-    }
-  } else {
-    updateSyncIndicator('offline');
-  }
-}
-
-init();
+loadLocal();
+renderAll();
+updateTimestamp();
+updateGHButtons();
+document.getElementById('subtabs-syntax').style.display = 'flex';
 </script>
-
 </body>
 </html>
