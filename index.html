@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang="zh-TW"><head>
+<html lang="zh-TW">
+<head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Reallusion HTML Email 工作手冊 v3</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
   --bg: #f5f2ed;
@@ -1202,19 +1203,19 @@ main { flex: 1; padding: 28px 36px; }
 <header class="top-header">
   <div class="header-brand">
     <button class="mobile-menu-btn" onclick="toggleMobileSidebar()" aria-label="選單">
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"></path></svg>
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
     </button>
     <!-- Logo：三張對話卡片疊放，參考圖二 -->
     <div class="header-icon" style="background:transparent;padding:0;width:36px;height:32px;position:relative;">
       <svg width="36" height="32" viewBox="0 0 36 32" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- 左後紫色卡片 -->
-        <rect x="0" y="4" width="18" height="14" rx="4" fill="#c4b5f0" transform="rotate(-10 4 8)"></rect>
+        <rect x="0" y="4" width="18" height="14" rx="4" fill="#c4b5f0" transform="rotate(-10 4 8)"/>
         <!-- 右後綠色卡片 -->
-        <rect x="16" y="6" width="18" height="14" rx="4" fill="#b8dea0" transform="rotate(8 24 10)"></rect>
+        <rect x="16" y="6" width="18" height="14" rx="4" fill="#b8dea0" transform="rotate(8 24 10)"/>
         <!-- 前方主白色卡片 -->
-        <rect x="7" y="6" width="20" height="16" rx="4" fill="#ffffff" stroke="#2a2a2a" stroke-width="1.4"></rect>
+        <rect x="7" y="6" width="20" height="16" rx="4" fill="#ffffff" stroke="#2a2a2a" stroke-width="1.4"/>
         <!-- 卡片內線條 -->
-        <path d="M11 11h12M11 14.5h12M11 18h7" stroke="#2a2a2a" stroke-width="1.3" stroke-linecap="round"></path>
+        <path d="M11 11h12M11 14.5h12M11 18h7" stroke="#2a2a2a" stroke-width="1.3" stroke-linecap="round"/>
       </svg>
     </div>
     <div class="header-title">HTML Email 工作手冊</div>
@@ -1222,10 +1223,13 @@ main { flex: 1; padding: 28px 36px; }
     <div class="header-subtitle">Reallusion · Internal Handbook</div>
   </div>
   <div class="header-right">
-    <div class="status-pill" id="statusPill"><div class="status-dot" style="background:var(--warn)"></div> 同步中...</div>
-    <button class="btn" id="btnPull" onclick="ghPull()" title="從 GitHub 拉取最新資料" style="display: inline-flex;">↓ 拉取</button>
-    <button class="btn" id="btnPush" onclick="ghPush()" title="推送資料到 GitHub" style="display: inline-flex;">↑ 資料</button>
-    <button class="btn accent" id="btnPushHTML" onclick="ghPushHTML()" title="上傳新版工具到 GitHub" style="display: inline-flex;">↑ 上傳新版</button>
+    <div class="status-pill" id="statusPill">
+      <div class="status-dot"></div>
+      就緒
+    </div>
+    <button class="btn" id="btnPull" onclick="ghPull()" title="從 GitHub 拉取最新資料" style="display:none;">↓ 拉取</button>
+    <button class="btn" id="btnPush" onclick="ghPush()" title="推送資料到 GitHub" style="display:none;">↑ 資料</button>
+    <button class="btn accent" id="btnPushHTML" onclick="ghPushHTML()" title="上傳新版工具到 GitHub" style="display:none;">↑ 上傳新版</button>
     <button class="btn" onclick="openGHPanel()">⚙️ 設定</button>
   </div>
 </header>
@@ -1238,15 +1242,15 @@ main { flex: 1; padding: 28px 36px; }
   <div class="sidebar-toprow">
     <div class="search-wrap">
       <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <circle cx="11" cy="11" r="7"></circle><path d="M21 21l-4.35-4.35"></path>
+        <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.35-4.35"/>
       </svg>
       <input type="text" class="sidebar-search" id="globalSearch" placeholder="搜尋全站...">
     </div>
     <button class="sidebar-toggle-btn" onclick="toggleSidebar()" title="收合側欄">
       <!-- sidebar panel icon（圖一那種）-->
       <svg class="toggle-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
-        <path d="M9 3v18"></path>
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <path d="M9 3v18"/>
       </svg>
     </button>
   </div>
@@ -1256,7 +1260,7 @@ main { flex: 1; padding: 28px 36px; }
       <li><button data-panel="home" onclick="switchPanel('home')">
         <span class="nav-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"></path><path d="M9 21V12h6v9"></path>
+            <path d="M3 9.5L12 3l9 6.5V20a1 1 0 01-1 1H4a1 1 0 01-1-1V9.5z"/><path d="M9 21V12h6v9"/>
           </svg>
         </span>
         <span class="nav-label">首頁</span>
@@ -1264,7 +1268,7 @@ main { flex: 1; padding: 28px 36px; }
       <li><button class="active" data-panel="syntax" onclick="switchPanel('syntax')">
         <span class="nav-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect>
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
           </svg>
         </span>
         <span class="nav-label">語法庫</span>
@@ -1272,7 +1276,7 @@ main { flex: 1; padding: 28px 36px; }
       <li><button data-panel="notes" onclick="switchPanel('notes')">
         <span class="nav-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M7 8h10M7 12h10M7 16h6"></path>
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/>
           </svg>
         </span>
         <span class="nav-label">UI 規範</span>
@@ -1280,7 +1284,7 @@ main { flex: 1; padding: 28px 36px; }
       <li><button data-panel="checks" onclick="switchPanel('checks')">
         <span class="nav-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M9 11l3 3L22 4"></path><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+            <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
           </svg>
         </span>
         <span class="nav-label">Check 清單</span>
@@ -1288,7 +1292,7 @@ main { flex: 1; padding: 28px 36px; }
       <li><button data-panel="issues" onclick="switchPanel('issues')">
         <span class="nav-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="9"></circle><path d="M12 8v4m0 4h.01"></path>
+            <circle cx="12" cy="12" r="9"/><path d="M12 8v4m0 4h.01"/>
           </svg>
         </span>
         <span class="nav-label">注意事項</span>
@@ -1296,7 +1300,7 @@ main { flex: 1; padding: 28px 36px; }
       <li><button data-panel="tutorial" onclick="switchPanel('tutorial')">
         <span class="nav-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path>
+            <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
           </svg>
         </span>
         <span class="nav-label">新手教學</span>
@@ -1306,7 +1310,7 @@ main { flex: 1; padding: 28px 36px; }
 
   <div class="sidebar-footer">
     <div class="sidebar-footer-inner">
-      <div class="sidebar-timestamp" id="sidebarTimestamp">最後更新 4/21 下午10:15 · v1</div>
+      <div class="sidebar-timestamp" id="sidebarTimestamp"></div>
     </div>
   </div>
 </aside>
@@ -1316,7 +1320,7 @@ main { flex: 1; padding: 28px 36px; }
 
   <!-- Sub-tab bars: 語法庫有三個分頁 -->
   <div id="subtabs-home" class="subtab-bar" style="display:none;"></div>
-  <div id="subtabs-syntax" class="subtab-bar" style="display: flex;">
+  <div id="subtabs-syntax" class="subtab-bar">
     <button class="subtab-btn active" onclick="switchSub('blocks-area', this)">區塊語法</button>
     <button class="subtab-btn" onclick="switchSub('blocks-quick', this)">快速語法</button>
     <button class="subtab-btn" onclick="switchSub('blocks-issues-sub', this)">問題圖記</button>
@@ -1345,85 +1349,8 @@ main { flex: 1; padding: 28px 36px; }
           <div class="desc">常用的 HTML Email 模組，點選卡片即可編輯</div>
         </div>
         <!-- 分類篩選列 -->
-        <div class="filter-bar" id="filterBar">
-    <span class="filter-label">篩選：</span>
-    <button class="filter-chip active" onclick="filterByCat('全部')">全部</button>
-    
-      <button class="filter-chip " onclick="filterByCat('Banner')">Banner</button>
-    
-      <button class="filter-chip " onclick="filterByCat('按鈕')">按鈕</button>
-    
-      <button class="filter-chip " onclick="filterByCat('文字排版')">文字排版</button>
-    
-      <button class="filter-chip " onclick="filterByCat('圖片')">圖片</button>
-    
-      <button class="filter-chip " onclick="filterByCat('RWD')">RWD</button>
-    
-      <button class="filter-chip " onclick="filterByCat('定價')">定價</button>
-    
-      <button class="filter-chip " onclick="filterByCat('信件結構')">信件結構</button>
-    
-      <button class="filter-chip " onclick="filterByCat('裝飾邊框')">裝飾邊框</button>
-    
-      <button class="filter-chip " onclick="filterByCat('間距')">間距</button>
-    
-    <button class="filter-chip add-cat" onclick="addCategory()">＋ 新增類別</button>
-  </div>
-        <div class="cards-grid" id="blocksGrid">
-    <div class="card" draggable="true" data-id="b1" onclick="openBlockEditor('b1')" ondragstart="dragStart(event,'block')" ondragover="dragOver(event)" ondrop="dropOn(event,'block')" ondragend="dragEnd(event)">
-      <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <circle cx="4" cy="3" r="1" fill="currentColor"></circle><circle cx="8" cy="3" r="1" fill="currentColor"></circle>
-          <circle cx="4" cy="6" r="1" fill="currentColor"></circle><circle cx="8" cy="6" r="1" fill="currentColor"></circle>
-          <circle cx="4" cy="9" r="1" fill="currentColor"></circle><circle cx="8" cy="9" r="1" fill="currentColor"></circle>
-        </svg>
-      </div>
-      <div class="card-img">
-        <span style="font-size:28px;opacity:.35;">📷</span>
-      </div>
-      <div class="card-body">
-        <h3>Email 容器（基本外框）</h3>
-        <div class="card-desc">最外層 700px table，所有內容的容器。</div>
-        <span class="card-tag">信件結構</span>
-      </div>
-    </div>
-  
-    <div class="card" draggable="true" data-id="b2" onclick="openBlockEditor('b2')" ondragstart="dragStart(event,'block')" ondragover="dragOver(event)" ondrop="dropOn(event,'block')" ondragend="dragEnd(event)">
-      <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <circle cx="4" cy="3" r="1" fill="currentColor"></circle><circle cx="8" cy="3" r="1" fill="currentColor"></circle>
-          <circle cx="4" cy="6" r="1" fill="currentColor"></circle><circle cx="8" cy="6" r="1" fill="currentColor"></circle>
-          <circle cx="4" cy="9" r="1" fill="currentColor"></circle><circle cx="8" cy="9" r="1" fill="currentColor"></circle>
-        </svg>
-      </div>
-      <div class="card-img">
-        <span style="font-size:28px;opacity:.35;">📷</span>
-      </div>
-      <div class="card-body">
-        <h3>左右並排（2欄）</h3>
-        <div class="card-desc">左右兩欄並列，手機版會堆疊。</div>
-        <span class="card-tag">RWD</span>
-      </div>
-    </div>
-  
-    <div class="card" draggable="true" data-id="b3" onclick="openBlockEditor('b3')" ondragstart="dragStart(event,'block')" ondragover="dragOver(event)" ondrop="dropOn(event,'block')" ondragend="dragEnd(event)">
-      <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序">
-        <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-          <circle cx="4" cy="3" r="1" fill="currentColor"></circle><circle cx="8" cy="3" r="1" fill="currentColor"></circle>
-          <circle cx="4" cy="6" r="1" fill="currentColor"></circle><circle cx="8" cy="6" r="1" fill="currentColor"></circle>
-          <circle cx="4" cy="9" r="1" fill="currentColor"></circle><circle cx="8" cy="9" r="1" fill="currentColor"></circle>
-        </svg>
-      </div>
-      <div class="card-img">
-        <span style="font-size:28px;opacity:.35;">📷</span>
-      </div>
-      <div class="card-body">
-        <h3>上下堆疊（單欄）</h3>
-        <div class="card-desc">單欄垂直排列，手機自動置中。</div>
-        <span class="card-tag">RWD</span>
-      </div>
-    </div>
-  </div>
+        <div class="filter-bar" id="filterBar"></div>
+        <div class="cards-grid" id="blocksGrid"></div>
         <button class="add-block-btn" onclick="addNewBlock()">＋ 新增區塊</button>
       </div>
 
@@ -1454,32 +1381,7 @@ main { flex: 1; padding: 28px 36px; }
         <h2>UI 規範</h2>
         <div class="desc">踩雷、小技巧與心得</div>
       </div>
-      <div id="notesGrid" class="cards-grid">
-    <div class="note-card">
-      <div class="note-img" onclick="uploadImg('n','n1')">📸 點擊上傳圖片</div>
-      <h3>倒數計時注意事項</h3>
-      <div class="note-body">1. alt 都打上截止日期，以免失效時還能有文字。
-2. 開信數超過 1 萬會失效，可用不同信生不同連結。
-3. Newsletter 擋不適合放，原因是同時使用會讓倒數計時失效。</div>
-      
-    </div>
-  
-    <div class="note-card">
-      <div class="note-img" onclick="uploadImg('n','n2')">📸 點擊上傳圖片</div>
-      <h3>索老大大阿科普 fillin 篩選公式</h3>
-      <div class="note-body">篩掉 @reallusion.com 信箱：
-=IF(ISNUMBER(SEARCH("@reallusion.com",A1)),"",A1)</div>
-      
-    </div>
-  
-    <div class="note-card">
-      <div class="note-img" onclick="uploadImg('n','n3')">📸 點擊上傳圖片</div>
-      <h3>跑版暴力解法</h3>
-      <div class="note-body">兩邊因字數不一樣高，可在 table 加上 width="100%"。
-（但不同電腦看還是有風險）</div>
-      
-    </div>
-  </div>
+      <div id="notesGrid" class="cards-grid"></div>
       <button class="add-block-btn" onclick="addNewNote()">＋ 新增筆記</button>
     </section>
 
@@ -1489,77 +1391,7 @@ main { flex: 1; padding: 28px 36px; }
         <h2>Check 清單</h2>
         <div class="desc">出稿前逐項確認</div>
       </div>
-      <div id="checksContainer">
-    <div class="check-section">
-      <h3>初次校稿</h3>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>Cannot see 能不能點</span>
-        </div>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>跨月時檢查右上角日期</span>
-        </div>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>搜尋替換清理絕對連結</span>
-        </div>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>檢查所有圖片 display:block</span>
-        </div>
-      
-    </div>
-  
-    <div class="check-section">
-      <h3>RWD 確認</h3>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>最頂部的留白正常</span>
-        </div>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>箭頭換行正常</span>
-        </div>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>灰底正常</span>
-        </div>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>標題沒過大</span>
-        </div>
-      
-    </div>
-  
-    <div class="check-section">
-      <h3>測試信再次Check</h3>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>Gmail 測試正常</span>
-        </div>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>Outlook 測試正常</span>
-        </div>
-      
-        <div class="check-item">
-          <input type="checkbox" onchange="this.closest('.check-item').classList.toggle('done', this.checked)">
-          <span>iPhone 測試正常</span>
-        </div>
-      
-    </div>
-  </div>
+      <div id="checksContainer"></div>
     </section>
 
     <!-- ===== 注意事項 ===== -->
@@ -1568,168 +1400,7 @@ main { flex: 1; padding: 28px 36px; }
         <h2>注意事項</h2>
         <div class="desc">常見問題與解決方案</div>
       </div>
-      <div id="issuesContainer">
-    <div class="issue-list" id="issueList_issuesContainer">
-      
-        <div class="issue-compact" draggable="true" data-id="i1" onclick="openIssueModal('i1')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
-          <div class="issue-compact-inner">
-            <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
-              <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-                <circle cx="3" cy="3" r="1.2" fill="currentColor"></circle><circle cx="7" cy="3" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="8" r="1.2" fill="currentColor"></circle><circle cx="7" cy="8" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="13" r="1.2" fill="currentColor"></circle><circle cx="7" cy="13" r="1.2" fill="currentColor"></circle>
-              </svg>
-            </div>
-            <div class="issue-thumbs">
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-              <div class="issue-arrow">→</div>
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-            </div>
-            <div class="issue-info">
-              <h4>RWD 跑版</h4>
-              <p>點擊查看詳情</p>
-            </div>
-            <span class="card-tag" style="flex-shrink:0;">rwd</span>
-          </div>
-        </div>
-      
-        <div class="issue-compact" draggable="true" data-id="i2" onclick="openIssueModal('i2')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
-          <div class="issue-compact-inner">
-            <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
-              <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-                <circle cx="3" cy="3" r="1.2" fill="currentColor"></circle><circle cx="7" cy="3" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="8" r="1.2" fill="currentColor"></circle><circle cx="7" cy="8" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="13" r="1.2" fill="currentColor"></circle><circle cx="7" cy="13" r="1.2" fill="currentColor"></circle>
-              </svg>
-            </div>
-            <div class="issue-thumbs">
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-              <div class="issue-arrow">→</div>
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-            </div>
-            <div class="issue-info">
-              <h4>超連結 &amp; 底線不見</h4>
-              <p>點擊查看詳情</p>
-            </div>
-            <span class="card-tag" style="flex-shrink:0;">style</span>
-          </div>
-        </div>
-      
-        <div class="issue-compact" draggable="true" data-id="i3" onclick="openIssueModal('i3')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
-          <div class="issue-compact-inner">
-            <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
-              <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-                <circle cx="3" cy="3" r="1.2" fill="currentColor"></circle><circle cx="7" cy="3" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="8" r="1.2" fill="currentColor"></circle><circle cx="7" cy="8" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="13" r="1.2" fill="currentColor"></circle><circle cx="7" cy="13" r="1.2" fill="currentColor"></circle>
-              </svg>
-            </div>
-            <div class="issue-thumbs">
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-              <div class="issue-arrow">→</div>
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-            </div>
-            <div class="issue-info">
-              <h4>副標退到橘線後</h4>
-              <p>點擊查看詳情</p>
-            </div>
-            <span class="card-tag" style="flex-shrink:0;">layout</span>
-          </div>
-        </div>
-      
-        <div class="issue-compact" draggable="true" data-id="i4" onclick="openIssueModal('i4')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
-          <div class="issue-compact-inner">
-            <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
-              <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-                <circle cx="3" cy="3" r="1.2" fill="currentColor"></circle><circle cx="7" cy="3" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="8" r="1.2" fill="currentColor"></circle><circle cx="7" cy="8" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="13" r="1.2" fill="currentColor"></circle><circle cx="7" cy="13" r="1.2" fill="currentColor"></circle>
-              </svg>
-            </div>
-            <div class="issue-thumbs">
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-              <div class="issue-arrow">→</div>
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-            </div>
-            <div class="issue-info">
-              <h4>高度無法置頂</h4>
-              <p>點擊查看詳情</p>
-            </div>
-            <span class="card-tag" style="flex-shrink:0;">layout</span>
-          </div>
-        </div>
-      
-        <div class="issue-compact" draggable="true" data-id="i5" onclick="openIssueModal('i5')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
-          <div class="issue-compact-inner">
-            <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
-              <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-                <circle cx="3" cy="3" r="1.2" fill="currentColor"></circle><circle cx="7" cy="3" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="8" r="1.2" fill="currentColor"></circle><circle cx="7" cy="8" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="13" r="1.2" fill="currentColor"></circle><circle cx="7" cy="13" r="1.2" fill="currentColor"></circle>
-              </svg>
-            </div>
-            <div class="issue-thumbs">
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-              <div class="issue-arrow">→</div>
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-            </div>
-            <div class="issue-info">
-              <h4>圖片下方莫名空格</h4>
-              <p>點擊查看詳情</p>
-            </div>
-            <span class="card-tag" style="flex-shrink:0;">image</span>
-          </div>
-        </div>
-      
-        <div class="issue-compact" draggable="true" data-id="i6" onclick="openIssueModal('i6')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
-          <div class="issue-compact-inner">
-            <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
-              <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
-                <circle cx="3" cy="3" r="1.2" fill="currentColor"></circle><circle cx="7" cy="3" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="8" r="1.2" fill="currentColor"></circle><circle cx="7" cy="8" r="1.2" fill="currentColor"></circle>
-                <circle cx="3" cy="13" r="1.2" fill="currentColor"></circle><circle cx="7" cy="13" r="1.2" fill="currentColor"></circle>
-              </svg>
-            </div>
-            <div class="issue-thumbs">
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-              <div class="issue-arrow">→</div>
-              <div class="issue-thumb">
-                <span style="opacity:.3;font-size:16px;">📷</span>
-              </div>
-            </div>
-            <div class="issue-info">
-              <h4>網頁影片筆記</h4>
-              <p>點擊查看詳情</p>
-            </div>
-            <span class="card-tag" style="flex-shrink:0;">misc</span>
-          </div>
-        </div>
-      
-    </div>
-    <button class="add-block-btn" onclick="openIssueEditor(null)">＋ 新增問題紀錄</button>
-  </div>
+      <div id="issuesContainer"></div>
     </section>
 
     <!-- ===== 新手教學 ===== -->
@@ -1738,27 +1409,7 @@ main { flex: 1; padding: 28px 36px; }
         <h2>新手教學</h2>
         <div class="desc">流程說明與 SOP</div>
       </div>
-      <div id="tutContainer">
-    <div class="tutorial-section">
-      <div class="tutorial-title-badge">🧠 心理建設</div>
-      
-        <div class="tutorial-item">
-          <h4>你學的 HTML 在這裡為什麼不能用？</h4>
-          <p>Email 的對象是郵件客戶端，不是瀏覽器。Outlook 改用 Word 渲染，CSS 支援停留在非常原始的程度。</p>
-        </div>
-      
-        <div class="tutorial-item">
-          <h4>Outlook 為什麼這麼難搞？</h4>
-          <p>Outlook 2007 後用 Word 當渲染引擎，導致大量 CSS 失效。企業用戶還在用舊版，所以必須為最差的環境設計。</p>
-        </div>
-      
-        <div class="tutorial-item">
-          <h4>「我明明沒改什麼，怎麼就壞了？」</h4>
-          <p>同樣的 code 在不同地方看起來完全不同。Gmail 網頁版可能正常，但 Outlook 客户端卻跑版。</p>
-        </div>
-      
-    </div>
-  </div>
+      <div id="tutContainer"></div>
     </section>
   </main>
 </div>
@@ -1768,7 +1419,7 @@ main { flex: 1; padding: 28px 36px; }
   <div class="modal" style="max-width:500px;">
     <div class="modal-head">
       <div style="display:flex;align-items:center;gap:8px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path></svg>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
         <span>GitHub 連線設定</span>
       </div>
       <button class="close-x" onclick="closeGHPanel()">×</button>
@@ -1807,7 +1458,7 @@ main { flex: 1; padding: 28px 36px; }
         <div style="font-size:11px;color:var(--ink-mute);margin-top:4px;">點「↑ 上傳新版」時會更新這個檔案，通常是 <code style="background:var(--bg);padding:1px 5px;border-radius:3px;font-size:11px;">index.html</code>。</div>
       </div>
       <!-- 連線狀態 -->
-      <div id="ghStatusMsg" style="display: block; padding: 10px 14px; border-radius: 7px; font-size: 13px; margin-top: 4px; background: rgb(240, 250, 245); color: var(--ok);">✅ 連線成功！Repo: TimmyTurtle708/HTML-Handbook</div>
+      <div id="ghStatusMsg" style="display:none;padding:10px 14px;border-radius:7px;font-size:13px;margin-top:4px;"></div>
     </div>
     <div class="modal-footer" style="justify-content:space-between;">
       <button class="btn" onclick="testGHConnection()" style="color:var(--ink-mute);">🔌 測試連線</button>
@@ -1874,7 +1525,7 @@ main { flex: 1; padding: 28px 36px; }
   <img id="lightboxImg" src="" alt="">
 </div>
 
-<div class="toast" id="toast">✅ 設定已儲存</div>
+<div class="toast" id="toast"></div>
 
 <script>
 // ============================================================
@@ -3210,6 +2861,5 @@ updateGHButtons();
 initMobile();
 document.getElementById('subtabs-syntax').style.display = 'flex';
 </script>
-
-
-</body></html>
+</body>
+</html>
