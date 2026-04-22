@@ -225,10 +225,10 @@
   "issues": [
     {
       "id": "i2",
-      "cat": "style",
+      "cat": "跑版",
       "t": "超連結 & 底線不見",
-      "desc": "",
-      "detail": "",
+      "desc": "複製過來時漏掉後面的架構",
+      "detail": "可以改用F12裡的小箭頭>右鍵>複製元素才不會漏掉",
       "img": "",
       "codeBefore": "",
       "codeAfter": "",
@@ -278,6 +278,6 @@
   ],
   "meta": {
     "version": 1,
-    "updatedAt": 1776832225515
+    "updatedAt": 1776832254284
   }
 }
