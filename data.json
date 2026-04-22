@@ -274,9 +274,9 @@
     {
       "id": "i5",
       "cat": "image",
-      "t": "圖片下方莫名空格",
-      "desc": "",
-      "detail": "",
+      "t": "EMAIL字看起來跟網頁不一樣? (待補)",
+      "desc": "字形吃不到",
+      "detail": "• stage的網址經由FZ上傳HTML後會變成https:// \n• 因此就算直接把stage網址的stage拿掉也無法看出正確的字型\n• 一直以來都是H字型(吃不到R字型)",
       "img": "",
       "codeBefore": "",
       "codeAfter": "",
@@ -294,6 +294,6 @@
   ],
   "meta": {
     "version": 1,
-    "updatedAt": 1776851730379
+    "updatedAt": 1776852068020
   }
 }
