@@ -249,10 +249,13 @@ code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
 }
 
 .header-title {
-  font-size: 15px;
+  font-size: 17px;
   font-weight: 900;
   color: var(--ink);
   letter-spacing: -0.02em;
+  line-height: 1;
+  align-self: center;
+  padding-top: 1px;
 }
 
 .header-divider {
@@ -393,6 +396,7 @@ code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
 /* collapsed 時搜尋區隱藏 */
 .sidebar.collapsed .sidebar-toprow { justify-content: center; padding: 12px 0 8px; }
 .sidebar.collapsed .sidebar-toprow .search-wrap { display: none; }
+.sidebar.collapsed .sidebar-toprow .sidebar-toggle-btn { margin: 0 auto; }
 
 /* 收合按鈕 */
 .sidebar-toggle-btn {
@@ -402,8 +406,8 @@ code, pre, .mono { font-family: 'JetBrains Mono', monospace; }
   cursor: pointer;
   color: var(--ink-mute);
   padding: 0;
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1883,6 +1887,7 @@ main { flex: 1; padding: 28px 36px; }
           </div>
         
       </div>
+      
     </div>
   
     <div class="syn-section">
@@ -1908,6 +1913,7 @@ main { flex: 1; padding: 28px 36px; }
           </div>
         
       </div>
+      
     </div>
   
     <div class="syn-section">
@@ -1933,6 +1939,7 @@ main { flex: 1; padding: 28px 36px; }
           </div>
         
       </div>
+      
     </div>
   </div>
         <button class="add-block-btn" onclick="addNewSynGroup()" style="margin-top:12px;">＋ 新增分類</button>
@@ -1947,7 +1954,7 @@ main { flex: 1; padding: 28px 36px; }
         <div id="issuesContainer2">
     <div class="issue-list" id="issueList_issuesContainer2">
       
-        <div class="issue-compact" draggable="true" data-id="i1" onclick="openIssueModal('i1')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
+        <div class="issue-compact" draggable="true" data-id="1" onclick="openIssueModal('1')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
           <div class="issue-compact-inner">
             <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
@@ -1973,7 +1980,7 @@ main { flex: 1; padding: 28px 36px; }
           </div>
         </div>
       
-        <div class="issue-compact" draggable="true" data-id="i2" onclick="openIssueModal('i2')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
+        <div class="issue-compact" draggable="true" data-id="2" onclick="openIssueModal('2')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
           <div class="issue-compact-inner">
             <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
@@ -1999,7 +2006,7 @@ main { flex: 1; padding: 28px 36px; }
           </div>
         </div>
       
-        <div class="issue-compact" draggable="true" data-id="i3" onclick="openIssueModal('i3')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
+        <div class="issue-compact" draggable="true" data-id="3" onclick="openIssueModal('3')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
           <div class="issue-compact-inner">
             <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
@@ -2025,7 +2032,7 @@ main { flex: 1; padding: 28px 36px; }
           </div>
         </div>
       
-        <div class="issue-compact" draggable="true" data-id="i4" onclick="openIssueModal('i4')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
+        <div class="issue-compact" draggable="true" data-id="4" onclick="openIssueModal('4')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
           <div class="issue-compact-inner">
             <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
@@ -2051,7 +2058,7 @@ main { flex: 1; padding: 28px 36px; }
           </div>
         </div>
       
-        <div class="issue-compact" draggable="true" data-id="i5" onclick="openIssueModal('i5')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
+        <div class="issue-compact" draggable="true" data-id="5" onclick="openIssueModal('5')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
           <div class="issue-compact-inner">
             <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
@@ -2077,7 +2084,7 @@ main { flex: 1; padding: 28px 36px; }
           </div>
         </div>
       
-        <div class="issue-compact" draggable="true" data-id="i6" onclick="openIssueModal('i6')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
+        <div class="issue-compact" draggable="true" data-id="6" onclick="openIssueModal('6')" ondragstart="dragStart(event,'issue')" ondragover="dragOver(event)" ondrop="dropOn(event,'issue')" ondragend="dragEnd(event)">
           <div class="issue-compact-inner">
             <div class="drag-handle" onclick="event.stopPropagation()" title="拖移排序" style="position:relative;top:auto;right:auto;opacity:0;width:18px;height:36px;flex-shrink:0;">
               <svg width="10" height="16" viewBox="0 0 10 16" fill="none">
@@ -3073,7 +3080,7 @@ function renderSyntaxCore(containerId) {
   if (!c) return;
   c.innerHTML = DATA.syntax.map((g, gi) => `
     <div class="syn-section">
-      <h3>${escapeHtml(g.label)}</h3>
+      <h3>${escapeHtml(g.label)}${EDIT_MODE ? `<button class="btn" onclick="deleteSynGroup(${gi})" style="font-size:11px;padding:3px 8px;margin-left:8px;color:var(--err);">✕ 刪分類</button>` : ''}</h3>
       <div class="syn-rows">
         ${g.items.map((r, ri) => `
           <div class="syn-row">
@@ -3083,6 +3090,7 @@ function renderSyntaxCore(containerId) {
           </div>
         `).join('')}
       </div>
+      ${EDIT_MODE ? `<button class="btn" onclick="addSynItem(${gi})" style="font-size:12px;padding:5px 12px;margin-top:6px;">＋ 新增語法</button>` : ''}
     </div>
   `).join('');
 }
@@ -3103,6 +3111,24 @@ function addNewSynGroup() {
 function deleteSynItem(gi, ri) {
   DATA.syntax[gi].items.splice(ri, 1);
   saveLocal(); renderSyntax(); scheduleSync();
+}
+
+function addSynItem(gi) {
+  const name = prompt('語法名稱（例：刪除線）');
+  if (name === null) return;
+  const code = prompt('語法內容（例：text-decoration: line-through;）');
+  if (code === null) return;
+  if (!name.trim() || !code.trim()) { showToast('名稱與語法不可為空', 'err'); return; }
+  DATA.syntax[gi].items.push({ n: name.trim(), c: code.trim() });
+  saveLocal(); renderSyntax(); renderSyntaxCore('synContainer2'); scheduleSync();
+  showToast('✅ 已新增語法', 'ok');
+}
+
+function deleteSynGroup(gi) {
+  if (!confirm(`確定刪除「${DATA.syntax[gi].label}」整個分類？`)) return;
+  DATA.syntax.splice(gi, 1);
+  saveLocal(); renderSyntax(); renderSyntaxCore('synContainer2'); scheduleSync();
+  showToast('已刪除分類', 'ok');
 }
 
 // ============================================================
@@ -3347,6 +3373,9 @@ function openIssueEditor(id) {
     tempImgBefore: issue ? (issue.imgBefore || '') : '',
     tempImgAfter: issue ? (issue.imgAfter || '') : ''
   };
+  // 確保存檔按鈕可見
+  const saveBtn = document.getElementById('editorSaveBtn');
+  if (saveBtn) saveBtn.style.display = 'inline-flex';
 
   document.getElementById('editorTitle').innerHTML = issue
     ? `<input id="f_title" value="${escapeAttr(issue.t)}" placeholder="問題標題" style="border:none;background:transparent;font-size:16px;font-weight:700;font-family:inherit;color:var(--ink);width:100%;outline:none;padding:0;">`
@@ -3912,10 +3941,12 @@ function showToast(msg, type) {
 function renderAll() {
   renderBlocks();
   renderSyntax();
+  renderSyntaxCore('synContainer2');
   renderNotes();
   renderChecks();
   renderTutorial();
   renderIssues();
+  renderIssuesCore('issuesContainer2');
 }
 
 // ============================================================
