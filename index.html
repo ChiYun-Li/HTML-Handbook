@@ -2071,7 +2071,7 @@ body.modal-open {
         </span>
         <span class="nav-label">備忘錄</span>
       </button></li>
-      <li><button data-panel="tutorial" onclick="switchPanel('tutorial')">
+      <li><button data-panel="tutorial" onclick="switchPanel('tutorial')" class="">
         <span class="nav-icon">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
             <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"></path><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"></path>
@@ -2090,7 +2090,7 @@ body.modal-open {
 </aside>
 
 <!-- ===== 主容器 ===== -->
-<div class="main-container">
+<div class="main-container" style="margin-left: var(--sidebar-w);">
 
   <!-- Sub-tab bars: 語法庫有三個分頁 -->
   <div id="subtabs-home" class="subtab-bar" style="display: flex;"></div>
@@ -2104,11 +2104,11 @@ body.modal-open {
     <button class="subtab-btn" onclick="switchNotesSub('notes-type', this)">文字樣式</button>
     <button class="subtab-btn" onclick="switchNotesSub('notes-assets', this)">圖素</button>
   </div>
-  <div id="subtabs-checks" class="subtab-bar" style="display: none;">
+  <div id="subtabs-checks" class="subtab-bar" style="display:none;">
     <button class="subtab-btn active" onclick="switchChecksSub('checks-main', this)">Check 清單</button>
     <button class="subtab-btn" onclick="switchChecksSub('checks-cautions', this)">注意事項</button>
   </div>
-  <div id="subtabs-tutorial" class="subtab-bar" style="display:none;"></div>
+  <div id="subtabs-tutorial" class="subtab-bar" style="display: none;"></div>
 
   <main>
     <!-- ===== 首頁 ===== -->
@@ -2123,7 +2123,7 @@ body.modal-open {
     <div class="home-hero-row">
       <div class="home-banner" style="--timmy-bg: #e8ddd4;">
         <div class="home-banner-left">
-          <div class="home-quote">出海探險？<br>不，是探索為什麼手機版跑版了。</div>
+          <div class="home-quote">條紋衫遮住了身材，<br>但遮不住 console error。</div>
           <div class="home-quote-deco">— Timmy 說</div>
         </div>
         <div class="home-banner-right">
@@ -2140,33 +2140,33 @@ body.modal-open {
           </div>
           <!-- 固定高度的結果列（不撐高） -->
           <div class="fortune-result-bar" id="fortuneResultBar">
-            <span class="fortune-result-idle" id="fortuneResultIdle" style="display: none;">點轉盤中央轉動</span>
-            <span class="fortune-result-show" id="fortuneResultShow" style="display: flex;">
-              <span class="fortune-num-badge" id="fortuneNum" style="background: rgb(144, 96, 192);">中籤</span>
-              <span class="fortune-result-text" id="fortuneText">平靜出稿， · 連 RWD 都乖乖的。</span>
+            <span class="fortune-result-idle" id="fortuneResultIdle">點轉盤中央轉動</span>
+            <span class="fortune-result-show" id="fortuneResultShow" style="display:none;">
+              <span class="fortune-num-badge" id="fortuneNum"></span>
+              <span class="fortune-result-text" id="fortuneText"></span>
             </span>
           </div>
         </div>
       </div>
       <!-- 右側小工具欄 -->
       <div class="home-widgets-col" id="homeWidgets">
-        <!-- 天氣（靜態佔位，未來可接 API）-->
-        <div class="home-widget" id="widgetWeather">
-          <div class="home-widget-label">台北天氣</div>
-          <div class="home-widget-main" id="weatherMain">🌧️ 20°</div>
-          <div class="home-widget-sub" id="weatherSub">微風</div>
-        </div>
-        <!-- 今日日期 -->
+        <!-- 時鐘 -->
         <div class="home-widget">
-          <div class="home-widget-label">今天</div>
-          <div class="home-widget-main" id="todayDate" style="font-size:20px;">4/30</div>
+          <div class="home-widget-label" id="todayDateFull">2026年4月30日</div>
+          <div class="home-widget-main" id="todayClock" style="font-size:20px;font-variant-numeric:tabular-nums;letter-spacing:-.02em;">下午 5:32</div>
           <div class="home-widget-sub" id="todayDay">週四</div>
         </div>
-        <!-- 出稿 Check 進度 -->
-        <div class="home-widget home-widget--check" onclick="switchPanel('checks')" style="cursor:pointer;">
-          <div class="home-widget-label">出稿 Check</div>
-          <div class="home-widget-main" id="homeCheckNum" style="font-size:22px;">0/32</div>
-          <div class="home-check-bar" style="margin-top:6px;"><div id="homeCheckFill" style="height:100%;background:var(--accent);border-radius:3px;width:0%;transition:width .5s;"></div></div>
+        <!-- 辦公室溫度 -->
+        <div class="home-widget" id="widgetOfficeTemp">
+          <div class="home-widget-label">辦公室溫度</div>
+          <div class="home-widget-main" id="officeTempMain" style="font-size:20px;">🧊 13°C</div>
+          <div class="home-widget-sub" id="officeTempSub">天寒地凍 · 建議申請公傷</div>
+        </div>
+        <!-- 台北天氣 -->
+        <div class="home-widget" id="widgetWeather">
+          <div class="home-widget-label">台北天氣</div>
+          <div class="home-widget-main" id="weatherMain" style="font-size:20px;">🌧️ 19°</div>
+          <div class="home-widget-sub" id="weatherSub">微風</div>
         </div>
       </div>
     </div>
@@ -3483,7 +3483,7 @@ body.modal-open {
     </section>
 
     <!-- ===== 新手教學 ===== -->
-    <section id="tutorial-panel" class="panel" style="display:none;">
+    <section id="tutorial-panel" class="panel" style="display: none;">
       <div class="content-header">
         <h2>新手教學</h2>
         <div class="desc">流程說明與 SOP</div>
@@ -3509,7 +3509,7 @@ body.modal-open {
             <span class="tutorial-item-title">Outlook 為什麼這麼難搞？</span>
             <span class="tutorial-caret">▸</span>
           </button>
-          <div class="tutorial-body" id="tutBody_0_1" style="display:none;">
+          <div class="tutorial-body" id="tutBody_0_1" style="display: none;">
             <div class="tutorial-desc">Outlook 2007 後用 Microsoft Word 的渲染引擎來顯示 HTML Email。Word 不是瀏覽器，不支援大部分 CSS。企業用戶還有很多人用 Outlook 2016/2019，必須為最差的環境設計。</div>
             
             <div class="tutorial-tip">💡 你永遠無法讓 Outlook 完美，只能讓它「夠好用」。</div>
@@ -3521,7 +3521,7 @@ body.modal-open {
             <span class="tutorial-item-title">「我明明沒改什麼，怎麼就壞了？」</span>
             <span class="tutorial-caret">▸</span>
           </button>
-          <div class="tutorial-body" id="tutBody_0_2" style="display:none;">
+          <div class="tutorial-body" id="tutBody_0_2" style="display: none;">
             <div class="tutorial-desc">同樣的 code 在不同環境看起來完全不同：Gmail 網頁版正常、Apple Mail 正常、Outlook 桌面版卻跑版。這是 Email 開發的常態，不是你的錯。</div>
             
             <div class="tutorial-tip">💡 測試環境越多越好。Litmus 或 Email on Acid 可以一次看多個 client 截圖。</div>
@@ -3538,7 +3538,7 @@ body.modal-open {
             <span class="tutorial-item-title">為什麼一定要用 table 排版？</span>
             <span class="tutorial-caret">▸</span>
           </button>
-          <div class="tutorial-body" id="tutBody_1_0" style="display:none;">
+          <div class="tutorial-body" id="tutBody_1_0" style="display: none;">
             <div class="tutorial-desc">Outlook 不支援 flexbox/grid，而 table 是 HTML 最古老的排版方式，所有 Email client 都能正確解析。每一個區塊都要用 table &gt; tr &gt; td 包起來。</div>
             <pre class="tutorial-code">&lt;table width="600" cellpadding="0" cellspacing="0" border="0"&gt;
   &lt;tr&gt;
@@ -3554,7 +3554,7 @@ body.modal-open {
             <span class="tutorial-item-title">width 要寫在哪裡？</span>
             <span class="tutorial-caret">▸</span>
           </button>
-          <div class="tutorial-body" id="tutBody_1_1" style="display:none;">
+          <div class="tutorial-body" id="tutBody_1_1" style="display: none;">
             <div class="tutorial-desc">width 要同時寫在 HTML attribute 和 CSS style 兩個地方。只寫 style 在 Outlook 可能不生效，只寫 attribute 又可能在某些 client 不生效。</div>
             <pre class="tutorial-code">&lt;!-- 兩個都要寫 --&gt;
 &lt;table width="600" style="width:600px;"&gt;
@@ -7313,23 +7313,23 @@ function renderHome() {
       </div>
       <!-- 右側小工具欄 -->
       <div class="home-widgets-col" id="homeWidgets">
-        <!-- 天氣（靜態佔位，未來可接 API）-->
-        <div class="home-widget" id="widgetWeather">
-          <div class="home-widget-label">台北天氣</div>
-          <div class="home-widget-main" id="weatherMain">載入中...</div>
-          <div class="home-widget-sub" id="weatherSub"></div>
-        </div>
-        <!-- 今日日期 -->
+        <!-- 時鐘 -->
         <div class="home-widget">
-          <div class="home-widget-label">今天</div>
-          <div class="home-widget-main" id="todayDate" style="font-size:20px;"></div>
+          <div class="home-widget-label" id="todayDateFull">2025年4月30日</div>
+          <div class="home-widget-main" id="todayClock" style="font-size:20px;font-variant-numeric:tabular-nums;letter-spacing:-.02em;">--:--</div>
           <div class="home-widget-sub" id="todayDay"></div>
         </div>
-        <!-- 出稿 Check 進度 -->
-        <div class="home-widget home-widget--check" onclick="switchPanel('checks')" style="cursor:pointer;">
-          <div class="home-widget-label">出稿 Check</div>
-          <div class="home-widget-main" id="homeCheckNum" style="font-size:22px;">0/0</div>
-          <div class="home-check-bar" style="margin-top:6px;"><div id="homeCheckFill" style="height:100%;background:var(--accent);border-radius:3px;width:0%;transition:width .5s;"></div></div>
+        <!-- 辦公室溫度 -->
+        <div class="home-widget" id="widgetOfficeTemp">
+          <div class="home-widget-label">辦公室溫度</div>
+          <div class="home-widget-main" id="officeTempMain" style="font-size:20px;">❄️ ??°</div>
+          <div class="home-widget-sub" id="officeTempSub"></div>
+        </div>
+        <!-- 台北天氣 -->
+        <div class="home-widget" id="widgetWeather">
+          <div class="home-widget-label">台北天氣</div>
+          <div class="home-widget-main" id="weatherMain" style="font-size:20px;">載入中...</div>
+          <div class="home-widget-sub" id="weatherSub"></div>
         </div>
       </div>
     </div>
@@ -7359,32 +7359,67 @@ function renderHome() {
   setTimeout(() => {
     initWheel();
 
-    // 今日日期
+    // ── 日期 + 即時時鐘 ──
     const now = new Date();
-    const dateEl = document.getElementById('todayDate');
-    const dayEl = document.getElementById('todayDay');
+    const months = ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月'];
     const days = ['日','一','二','三','四','五','六'];
-    if (dateEl) dateEl.textContent = `${now.getMonth()+1}/${now.getDate()}`;
+    const dateFullEl = document.getElementById('todayDateFull');
+    const dayEl = document.getElementById('todayDay');
+    if (dateFullEl) dateFullEl.textContent = `${now.getFullYear()}年${months[now.getMonth()]}${now.getDate()}日`;
     if (dayEl) dayEl.textContent = `週${days[now.getDay()]}`;
 
-    // 天氣（使用 open-meteo 免費 API，不需 key）
+    // 即時時鐘（每秒更新）
+    function updateClock() {
+      const d = new Date();
+      const h = d.getHours();
+      const m = String(d.getMinutes()).padStart(2,'0');
+      const ampm = h >= 12 ? '下午' : '上午';
+      const h12 = h % 12 || 12;
+      const clockEl = document.getElementById('todayClock');
+      if (clockEl) clockEl.textContent = `${ampm} ${h12}:${m}`;
+    }
+    updateClock();
+    setInterval(updateClock, 1000);
+
+    // ── 辦公室溫度（從台北天氣取溫度，套辦公室梗）──
+    const officeMsgs = [
+      { max: 15, emoji: '🧊', text: '天寒地凍', sub: '建議申請公傷' },
+      { max: 17, emoji: '❄️', text: '低溫冷藏', sub: '喊水會凍結' },
+      { max: 19, emoji: '🥶', text: '冰姨館', sub: '外套穿到底' },
+      { max: 21, emoji: '🧣', text: '已達公傷標準', sub: '體感 0°C' },
+      { max: 23, emoji: '🌬️', text: '冷風陣陣', sub: '需要薑母鴨' },
+      { max: 26, emoji: '😌', text: '剛剛好', sub: '今天老闆手鬆' },
+      { max: 999,'emoji': '🔥', text: '熱到出油', sub: '冷氣壞了嗎' },
+    ];
+
+    // ── 台北天氣 API ──
     const weatherMain = document.getElementById('weatherMain');
     const weatherSub = document.getElementById('weatherSub');
-    if (weatherMain) {
-      fetch('https://api.open-meteo.com/v1/forecast?latitude=25.04&longitude=121.53&current_weather=true&timezone=Asia%2FTaipei')
-        .then(r => r.json())
-        .then(d => {
-          const w = d.current_weather;
-          const code = w.weathercode;
-          const emoji = code === 0 ? '☀️' : code <= 3 ? '🌤️' : code <= 48 ? '🌫️' : code <= 67 ? '🌧️' : code <= 77 ? '🌨️' : '⛈️';
-          if (weatherMain) weatherMain.textContent = `${emoji} ${Math.round(w.temperature)}°`;
-          if (weatherSub) weatherSub.textContent = w.windspeed > 20 ? '有風' : '微風';
-        })
-        .catch(() => {
-          if (weatherMain) weatherMain.textContent = '—';
-          if (weatherSub) weatherSub.textContent = '無法取得';
-        });
-    }
+    const officeTempMain = document.getElementById('officeTempMain');
+    const officeTempSub = document.getElementById('officeTempSub');
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=25.04&longitude=121.53&current_weather=true&timezone=Asia%2FTaipei')
+      .then(r => r.json())
+      .then(d => {
+        const w = d.current_weather;
+        const code = w.weathercode;
+        const emoji = code === 0 ? '☀️' : code <= 3 ? '🌤️' : code <= 48 ? '🌫️' : code <= 67 ? '🌧️' : code <= 77 ? '🌨️' : '⛈️';
+        const temp = Math.round(w.temperature);
+        if (weatherMain) weatherMain.textContent = `${emoji} ${temp}°`;
+        if (weatherSub) weatherSub.textContent = w.windspeed > 20 ? '有風' : '微風';
+
+        // 根據室外氣溫推算「辦公室體感」（永遠更冷）
+        const officeFeel = temp - Math.floor(Math.random() * 3 + 5);  // 比室外冷 5~7 度
+        const msg = officeMsgs.find(m => officeFeel <= m.max) || officeMsgs[officeMsgs.length-1];
+        if (officeTempMain) officeTempMain.textContent = `${msg.emoji} ${officeFeel}°C`;
+        if (officeTempSub) officeTempSub.textContent = `${msg.text} · ${msg.sub}`;
+      })
+      .catch(() => {
+        // 取不到天氣時，用固定嘲諷
+        if (weatherMain) weatherMain.textContent = '—';
+        if (weatherSub) weatherSub.textContent = '無法取得';
+        if (officeTempMain) officeTempMain.textContent = '❄️ ??°C';
+        if (officeTempSub) officeTempSub.textContent = '冰到靈魂出竅';
+      });
 
     // Check 進度
     const allChecks = (DATA.checks||[]).reduce((a,s)=>a+(s.items||[]).length, 0);
